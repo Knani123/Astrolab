@@ -10,7 +10,6 @@ const Login = () => {
   });
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  console.log(auth);
   const history = useHistory();
   const handleSubmit = (e) => {
     e.preventDefault();

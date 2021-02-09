@@ -5,3 +5,7 @@ export const LOGIN_FAILD = "LOGIN_FAILD";
 export const LOAD_USER_SUCCESS = "LOAD_USER_SUCCESS";
 export const LOAD_USER_FAILD = "LOAD_USER_FAILD";
 export const LOGOUT = "LOGOUT";
+export const ADD_WISH = "ADD_WISH";
+export const ADD_WISH_FAIL = "ADD_WISH_FAIL";
+export const GET_WISH_LIST = "GET_WISH_LIST";
+export const GET_WISH_LIST_FAIL = "GET_WISH_LIST_FAIL";

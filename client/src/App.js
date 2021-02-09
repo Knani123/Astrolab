@@ -6,6 +6,8 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import NavbarTop from "./NavbarTop";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Wishs from "./pages/Wishs";
+import Products from "./pages/Products";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <PrivateRoute path="/profile" component={Profile} />
+        <PrivateRoute path="/wishs" component={Wishs} />
+        <PrivateRoute path="/products" component={Products} />
       </Switch>
     </Router>
   );

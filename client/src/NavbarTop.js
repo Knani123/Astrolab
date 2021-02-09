@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { logOut } from "./js/actions/authAction";
 import myImage from "./gallery/myImage.PNG";
 const NavbarTop = () => {
@@ -36,10 +36,13 @@ const NavbarTop = () => {
   };
   return (
     <div style={{ display: handleDisplay(location.pathname) }}>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light px-2">
-        <div class="container-fluid">
+      <nav
+        className="navbar navbar-expand-lg navbar-light bg-light px-2"
+        style={{ paddingBottom: "0" }}
+      >
+        <div className="container-fluid">
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNavDropdown"
@@ -47,31 +50,42 @@ const NavbarTop = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
           <div
-            class="collapse navbar-collapse justify-content-between"
+            className="collapse navbar-collapse justify-content-between"
             id="navbarNavDropdown"
           >
-            <ul class="navbar-nav ">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
-                  My Wishlists
-                </a>
+            <ul className="navbar-nav ">
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link  h-100"
+                  aria-current="page"
+                  to="/wishs"
+                  activeClassName="text-primary "
+                  activeStyle={{ borderBottom: "2px solid blue" }}
+                >
+                  <i className="far fa-heart "></i> My Wishlists
+                </NavLink>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  My Products
-                </a>
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  to="/products"
+                  activeClassName="text-primary"
+                  activeStyle={{ borderBottom: "2px solid blue" }}
+                >
+                  <i className="far fa-file-alt"></i> My Products
+                </NavLink>
               </li>
               {/* dropDown */}
 
               {/* fin dropdown */}
             </ul>
             <ul className="navbar-nav">
-              <li class="nav-item dropdown">
+              <li className="nav-item dropdown">
                 <a
-                  class="nav-link dropdown-toggle"
+                  className="nav-link dropdown-toggle"
                   href="#"
                   id="navbarDropdownMenuLink"
                   role="button"
@@ -86,21 +100,26 @@ const NavbarTop = () => {
                   />
                 </a>
                 <ul
-                  class="dropdown-menu"
+                  className="dropdown-menu"
                   aria-labelledby="navbarDropdownMenuLink"
                 >
                   <li>
-                    <a class="dropdown-item" href="#">
-                      {user.lname ? user.lname : "User"}
-                    </a>
+                    <Link className="dropdown-item" to="/profile">
+                      <button
+                        className="btn btn-info"
+                        style={{
+                          padding: "2px",
+                          fontSize: "12px",
+                          color: "white",
+                        }}
+                      >
+                        <i className="fas fa-signature"></i>{" "}
+                        {user.fname ? user.fname : "User"}
+                      </button>
+                    </Link>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
-                      Compte
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item " href="#">
+                    <a className="dropdown-item " href="#">
                       <button
                         onClick={deconnect}
                         className="btn btn-danger"
@@ -116,10 +135,10 @@ const NavbarTop = () => {
                 </ul>
               </li>
               {/* doropdown 2 */}
-              <li class="nav-item dropdown  ">
+              <li className="nav-item dropdown  ">
                 <a
                   style={{ width: "50px" }}
-                  class="nav-link dropdown-toggle "
+                  className="nav-link dropdown-toggle "
                   href="#"
                   id="navbarDropdownMenuLink"
                   role="button"
@@ -129,21 +148,21 @@ const NavbarTop = () => {
                   {money.val}
                 </a>
                 <ul
-                  class="dropdown-menu "
+                  className="dropdown-menu "
                   aria-labelledby="navbarDropdownMenuLink"
                 >
                   <li name="val" value="Dollar" onClick={handleClick}>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       Dollar
                     </a>
                   </li>
                   <li name="val" value="dinar" onClick={handleClick}>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       Dinar
                     </a>
                   </li>
                   <li name="val" value="euro" onClick={handleClick}>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       Euro
                     </a>
                   </li>
