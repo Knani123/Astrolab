@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AddProduct from "../components/AddProduct";
+import ProductDetails from "../components/ProductDetails";
 const productList = [
   {
     _id: 1,
@@ -31,7 +32,9 @@ const Products = () => {
       return "";
     }
   };
-
+  useEffect(() => {
+    productList[0] && setActiv(productList[0]._id);
+  }, [productList[0]]);
   const [myProduct, setMyProduct] = useState({ title: "" });
   useEffect(() => {
     setMyProduct(productList.filter((el) => el._id == activ)[0]);
@@ -70,7 +73,11 @@ const Products = () => {
           className="col-10  border border-secondary "
           style={{ height: "90vh" }}
         >
-          {display ? <div>{myProduct && myProduct.title}</div> : <AddProduct />}
+          {display ? (
+            <>{myProduct && <ProductDetails product={myProduct} />}</>
+          ) : (
+            <AddProduct />
+          )}
         </div>
       </div>
     </div>

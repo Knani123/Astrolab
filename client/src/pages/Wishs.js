@@ -8,11 +8,13 @@ import ModalWish from "../components/ModalWish";
 import "./pages.css";
 import { Test } from "./myWishes";
 const Wishs = () => {
+  //load wishList
   const wish = useSelector((state) => state.wish);
-  console.log("wish .wishis", wish.wishs);
   const wishlist = [...Test, ...wish.wishs];
-  console.log("wishlist", wishlist);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getWishList());
+  }, []);
   //active wishLink
   const [activ, setActiv] = useState("");
   const activIt = (id) => {
@@ -22,16 +24,14 @@ const Wishs = () => {
       return "";
     }
   };
-
-  const [myWish, setMyWish] = useState({ name: "2" });
+  useEffect(() => {
+    wishlist[3] && setActiv(wishlist[3]._id);
+  }, [wishlist[3]]);
+  const [myWish, setMyWish] = useState({ name: "" });
   useEffect(() => {
     setMyWish(wishlist.filter((el) => el._id == activ)[0]);
   }, [activ]);
 
-  //load wishList
-  useEffect(() => {
-    dispatch(getWishList());
-  }, []);
   return (
     <div className="container-fluid border border-secondary ">
       <div className="row">
