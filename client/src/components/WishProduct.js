@@ -1,19 +1,22 @@
 import React from "react";
 
 const WishProduct = ({ el }) => {
+  console.log(el);
   return (
-    <div className="row ">
-      <span className="col-1 mx-3 border text-center">
+    <div className="row " style={{ lineHeight: " 300%" }}>
+      <span className="col-1 mx-3   text-center">
         <img
           src={el.image}
           alt=""
           style={{ width: "40px", borderRadius: "50%" }}
         />
       </span>
-      <span className="col-2 border">{el.title}</span>
-      <span className="col border">{el.Description}</span>
-      <span className="col-1 mx-3 border">{el.Status}</span>
-      <span className="col-1 mx-3 border">{el.Price}</span>
+      <span className="col-2  ">{el.name}</span>
+      <span className="col overflow-auto " style={{ maxHeight: "140px" }}>
+        {el.descriptions}
+      </span>
+      <span className="col-1 mx-3  ">{el.status}</span>
+      <span className="col-1 mx-3  ">{el.price}</span>
     </div>
   );
 };

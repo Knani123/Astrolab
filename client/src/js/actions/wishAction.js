@@ -8,6 +8,7 @@ import axios from "axios";
 
 //add wishList
 export const addWish = (info) => (dispatch) => {
+  console.log(info);
   axios
     .post("/wish", info)
     .then((res) => {
@@ -15,10 +16,10 @@ export const addWish = (info) => (dispatch) => {
         type: ADD_WISH,
         payload: res.data,
       });
+      getWishList();
     })
     .catch((err) => {
-      console.log(err);
-      console.log(err);
+      console.log(err.response.data);
       dispatch({
         type: ADD_WISH_FAIL,
         payload: err.response.data.errors,

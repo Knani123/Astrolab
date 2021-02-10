@@ -106,7 +106,7 @@ const NavbarTop = () => {
                   <li>
                     <Link className="dropdown-item" to="/profile">
                       <button
-                        className="btn btn-info"
+                        className="btn btn-info text-capitalize"
                         style={{
                           padding: "2px",
                           fontSize: "12px",

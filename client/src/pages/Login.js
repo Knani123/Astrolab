@@ -63,10 +63,7 @@ const Login = () => {
         <hr />
         <div className="d-flex">
           <p>Do you want to have access?</p> &nbsp;
-          <Link
-            to="/register"
-            className="btn btn-primary text-decoration-none "
-          >
+          <Link to="/register" className=" text-primary text-decoration-none ">
             Register
           </Link>
         </div>

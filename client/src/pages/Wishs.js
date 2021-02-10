@@ -2,19 +2,26 @@ import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getWishList } from "../js/actions/wishAction";
+import { addWish } from "../js/actions/wishAction";
+import { getMyProducts } from "../js/actions/productAction";
 import WishProduct from "../components/WishProduct";
 import HeaderWish from "../components/HeaderWish";
 import ModalWish from "../components/ModalWish";
 import "./pages.css";
-import { Test } from "./myWishes";
 const Wishs = () => {
   //load wishList
   const wish = useSelector((state) => state.wish);
-  const wishlist = [...Test, ...wish.wishs];
+  const wishlist = wish.wishs;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getWishList());
   }, []);
+  // create first wish
+  // useEffect(() => {
+  //   if (!wish.wishs.length) {
+  //     dispatch(addWish({ name: "First1 Wishlist" }));
+  //   }
+  // }, []);
   //active wishLink
   const [activ, setActiv] = useState("");
   const activIt = (id) => {
@@ -25,18 +32,28 @@ const Wishs = () => {
     }
   };
   useEffect(() => {
-    wishlist[3] && setActiv(wishlist[3]._id);
-  }, [wishlist[3]]);
+    wishlist[0] && setActiv(wishlist[0]._id);
+  }, [wishlist[0]]);
   const [myWish, setMyWish] = useState({ name: "" });
   useEffect(() => {
     setMyWish(wishlist.filter((el) => el._id == activ)[0]);
   }, [activ]);
 
+  // load userProduct
+  // load product from dtBase and store
+  useEffect(() => {
+    dispatch(getMyProducts());
+  }, []);
+  // get ProductList
+  const products = useSelector((state) => state.products);
+  const productList = products.Products;
+  console.log("productList", productList);
+  console.log("wishlist", wishlist);
   return (
     <div className="container-fluid border border-secondary ">
       <div className="row">
         <div
-          className="col-2  border border-secondary  d-flex flex-column p-2"
+          className="col-2  border border-secondary  d-flex flex-column p-2 overflow-auto"
           style={{ padding: "0", height: "90vh" }}
         >
           <ModalWish />
@@ -69,6 +86,7 @@ const Wishs = () => {
               </span>
             </div>
           </div>
+
           <div className="d-flex align-items-center justify-content-between border border-secondary p-3  m-3">
             <div
               className="d-flex  align-items-center justify-content-between"
@@ -89,11 +107,21 @@ const Wishs = () => {
               </span>
             </div>
           </div>
-
-          <div className=" border border-secondary  p-1 m-3 h-50">
+          <div
+            className=" border border-secondary  p-3 m-3  "
+            style={{ overflowY: "auto", height: "60%" }}
+          >
             <HeaderWish />
-            {myWish && myWish.products ? (
-              myWish.products.map((el) => <WishProduct el={el} />)
+            <hr />
+
+            {productList ? (
+              productList
+                .filter((el) => el.assignedTo == activ)
+                .map((el) => (
+                  <>
+                    <WishProduct el={el} /> <hr />
+                  </>
+                ))
             ) : (
               <h1>Loading...</h1>
             )}

@@ -25,9 +25,13 @@ const ModalWish = () => {
   function closeModal() {
     setIsOpen(false);
   }
+  const clearInfo = () => {
+    setInfo({ name: "" });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addWish(info));
+    clearInfo({ name: "" });
     setTimeout(() => {
       closeModal();
     }, 1500);

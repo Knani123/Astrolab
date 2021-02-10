@@ -9,3 +9,7 @@ export const ADD_WISH = "ADD_WISH";
 export const ADD_WISH_FAIL = "ADD_WISH_FAIL";
 export const GET_WISH_LIST = "GET_WISH_LIST";
 export const GET_WISH_LIST_FAIL = "GET_WISH_LIST_FAIL";
+export const ADD_Product = "ADD_Product";
+export const ADD_Product_FAIL = "ADD_Product_FAIL";
+export const GET_Product_LIST = "GET_Product_LIST";
+export const GET_Product_LIST_FAIL = "GET_Product_LIST_FAIL";

@@ -1,26 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { getMyProducts } from "../js/actions/productAction";
 import AddProduct from "../components/AddProduct";
 import ProductDetails from "../components/ProductDetails";
-const productList = [
-  {
-    _id: 1,
-    title: "sport",
-    Description: "blablabla",
-    image: "https://randomuser.me/api/portraits/men/75.jpg",
-    Status: "to buy",
-    Price: 700,
-  },
-  {
-    _id: 2,
-    title: "Hunt",
-    Description: "blablabla",
-    image: "Image",
-    Status: "Bought",
-    Price: 800,
-  },
-];
+
 const Products = () => {
+  const dispatch = useDispatch();
+  // load product from dtBase and store
+  useEffect(() => {
+    dispatch(getMyProducts());
+  }, []);
+  //get ProductList
+  const products = useSelector((state) => state.products);
+  const productList = products.Products;
+  console.log("myProduct", products);
   //add Product or display product
   const [display, setDisplay] = useState(true);
   //active wishLink
@@ -33,9 +27,9 @@ const Products = () => {
     }
   };
   useEffect(() => {
-    productList[0] && setActiv(productList[0]._id);
+    productList && productList[0] && setActiv(productList[0]._id);
   }, [productList[0]]);
-  const [myProduct, setMyProduct] = useState({ title: "" });
+  const [myProduct, setMyProduct] = useState({ name: "" });
   useEffect(() => {
     setMyProduct(productList.filter((el) => el._id == activ)[0]);
   }, [activ]);
@@ -65,7 +59,7 @@ const Products = () => {
                 setDisplay(true);
               }}
             >
-              {el.title}
+              {el.name}
             </Link>
           ))}
         </div>
@@ -74,7 +68,15 @@ const Products = () => {
           style={{ height: "90vh" }}
         >
           {display ? (
-            <>{myProduct && <ProductDetails product={myProduct} />}</>
+            <>
+              {myProduct ? (
+                <ProductDetails product={myProduct} />
+              ) : (
+                <h2 className="alert alert-danger text-center w-75 mt-3 mx-auto">
+                  You have no product or bad connection
+                </h2>
+              )}
+            </>
           ) : (
             <AddProduct />
           )}

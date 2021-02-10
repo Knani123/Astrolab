@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getWishList } from "../js/actions/wishAction";
+import { addProduct } from "../js/actions/productAction";
 import Product from "../gallery/Product.png";
 import "./cmp.css";
-const AddProduct = (props) => {
+const AddProduct = () => {
+  const dispatch = useDispatch();
   //load wishList to map them in whislist select
   const wish = useSelector((state) => state.wish);
   const wishlist = wish.wishs;
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getWishList());
   }, []);
@@ -16,10 +17,11 @@ const AddProduct = (props) => {
   const [info, setInfo] = useState({
     name: "",
     descriptions: "",
-    image: "",
+    image:
+      "https://img-0.journaldunet.com/pb5J23IF99HMY_P9HtO64G38epM=/1240x/smart/32d90de13a5f411c86709152f70fc67c/ccmcms-jdn/10861192.jpg",
     status: "",
     price: "",
-    wish: "",
+    assignedTo: "",
   });
   const clearInfo = () => {
     setInfo({
@@ -28,7 +30,7 @@ const AddProduct = (props) => {
       image: "",
       status: "",
       price: "",
-      wish: "",
+      assignedTo: "",
     });
   };
   const handleChange = (e) => {
@@ -37,7 +39,8 @@ const AddProduct = (props) => {
   //submit Product info
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(info);
+    dispatch(addProduct(info));
+    // clearInfo();
   };
   return (
     <div className="  w-50 m-auto d-flex flex-column align-itmes-center">
@@ -53,6 +56,7 @@ const AddProduct = (props) => {
           <span className="d-flex flex-column">
             <label htmlFor="name">Name</label>
             <input
+              value={info.name}
               type="text"
               id="name"
               className="form-control"
@@ -63,6 +67,7 @@ const AddProduct = (props) => {
           <span className="d-flex flex-column">
             <label htmlFor="price">Price</label>
             <input
+              value={info.price}
               type="number"
               id="price"
               className="form-control"
@@ -81,6 +86,7 @@ const AddProduct = (props) => {
         <span className="d-flex flex-column px-4 pb-2">
           <label htmlFor="descriptions">Description</label>
           <textarea
+            value={info.descriptions}
             required
             onChange={handleChange}
             name=""
@@ -94,10 +100,11 @@ const AddProduct = (props) => {
           <div className="d-flex flex-column">
             <label htmlFor="">Wishlist</label>
             <select
+              value={info.assignedTo}
               className="select"
               required
               onChange={handleChange}
-              id="wish"
+              id="assignedTo"
             >
               <option>--Choise WishList--</option>
               {wishlist &&
@@ -109,6 +116,7 @@ const AddProduct = (props) => {
           <div className="d-flex flex-column ">
             <label htmlFor="status">Status</label>
             <select
+              value={info.status}
               className="select"
               id="status"
               required

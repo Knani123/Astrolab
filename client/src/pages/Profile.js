@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "../js/actions/authAction";
+
 const Profile = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);

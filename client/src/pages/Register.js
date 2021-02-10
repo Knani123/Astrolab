@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import Alert from "../components/Alert";
 import { registerUser } from "../js/actions/authAction";
+
 const Register = () => {
   const [info, setInfo] = useState({
     lname: "",
@@ -100,7 +101,7 @@ const Register = () => {
         <hr />
         <div className="m-1 d-flex">
           <p>Do you already have access? </p> &nbsp;
-          <Link to="/login" className="btn btn-success">
+          <Link to="/login" className="text-success text-decoration-none">
             login
           </Link>
         </div>

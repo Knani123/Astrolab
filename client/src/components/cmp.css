@@ -10,3 +10,9 @@
       width:100px;
 
 }
+
+
+.hed span{
+  font-style: italic;
+  font-weight: bold;
+}
