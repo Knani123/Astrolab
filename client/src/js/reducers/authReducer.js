@@ -6,6 +6,7 @@ import {
   LOAD_USER_SUCCESS,
   LOAD_USER_FAILD,
   LOGOUT,
+  CLEAR_ERR,
 } from "../actions/actionTypes";
 const initState = {
   token: localStorage.getItem("token"),
@@ -26,6 +27,7 @@ const AuthReducer = (state = initState, action) => {
         isAuth: true,
         errors: null,
       };
+    case CLEAR_ERR:
     case LOAD_USER_FAILD:
     case LOGIN_FAILD:
     case REGISTER_FAILD:

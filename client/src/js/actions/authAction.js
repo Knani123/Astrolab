@@ -6,6 +6,7 @@ import {
   LOAD_USER_SUCCESS,
   LOAD_USER_FAILD,
   LOGOUT,
+  CLEAR_ERR,
 } from "./actionTypes";
 import axios from "axios";
 import setToken from "./setToken";
@@ -67,4 +68,8 @@ export const loadUser = () => (dispatch) => {
 //// log Out action
 export const logOut = () => (dispatch) => {
   dispatch({ type: LOGOUT });
+};
+//// Clear ERR
+export const clearErr = () => (dispatch) => {
+  dispatch({ type: CLEAR_ERR, payload: null });
 };

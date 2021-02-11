@@ -3,16 +3,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { getWishList } from "../js/actions/wishAction";
 import { addProduct } from "../js/actions/productAction";
 import Product from "../gallery/Product.png";
+import Alert from "./Alert";
 import "./cmp.css";
 const AddProduct = () => {
   const dispatch = useDispatch();
+  //get errors
+  const [ops, setOps] = useState("");
+  const products = useSelector((state) => state.products);
+  useEffect(() => {
+    setOps(products.errors);
+    setTimeout(() => setOps([]), 3000);
+  }, [products.errors]);
   //load wishList to map them in whislist select
   const wish = useSelector((state) => state.wish);
   const wishlist = wish.wishs;
   useEffect(() => {
     dispatch(getWishList());
   }, []);
-  console.log(wishlist);
   //change info to add product
   const [info, setInfo] = useState({
     name: "",
@@ -39,12 +46,15 @@ const AddProduct = () => {
   //submit Product info
   const handleSubmit = (e) => {
     e.preventDefault();
+
     dispatch(addProduct(info));
+
     // clearInfo();
   };
   return (
     <div className="  w-50 m-auto d-flex flex-column align-itmes-center">
       <h3 className="text-center m-4">Add Product</h3>
+      <Alert ops={ops} />
       <form
         className="border border-dark d-flex flex-column"
         onSubmit={handleSubmit}
@@ -106,11 +116,9 @@ const AddProduct = () => {
               onChange={handleChange}
               id="assignedTo"
             >
-              <option>--Choise WishList--</option>
+              <option value="">-- Choise WishList --</option>
               {wishlist &&
                 wishlist.map((el) => <option value={el._id}>{el.name}</option>)}
-              {/* <option value="">option 1</option>
-              <option value="">option 2</option> */}
             </select>
           </div>
           <div className="d-flex flex-column ">
@@ -122,6 +130,7 @@ const AddProduct = () => {
               required
               onChange={handleChange}
             >
+              <option value="">-- Choise Status --</option>
               <option value="To buy">To buy</option>
               <option value="Bought">Bought</option>
             </select>

@@ -1,27 +1,17 @@
 import React from "react";
 
-const Alert = ({ message }) => {
-  const handleDisplay = () => {
-    if (!message) {
-      return "none";
-    } else {
-      setTimeout(() => {
-        return "none";
-      }, 3000);
-    }
-  };
+const Alert = ({ ops }) => {
   return (
     <div
-      className=" alert   alert-danger "
       style={{
-        // transition: "0.4s",
-        // top: "0",
-        // left: "50%",
+        position: "absolute",
+        top: "130px",
+        margin: "0",
         padding: "0",
-        display: { handleDisplay },
       }}
+      className="alert alert-danger"
     >
-      {message && message.map((el) => <h1>{el.msg}</h1>)}
+      {ops && ops.map((el) => <h1>{el.msg}</h1>)}
     </div>
   );
 };

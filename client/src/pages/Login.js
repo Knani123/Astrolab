@@ -2,14 +2,22 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import Alert from "../components/Alert";
-import { loginUser } from "../js/actions/authAction";
+import { loginUser, clearErr } from "../js/actions/authAction";
 const Login = () => {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  // catch errors
+  const [ops, setOps] = useState([]);
+  useEffect(() => {
+    setOps(auth.errors);
+    setTimeout(() => setOps([]), 3000);
+  }, [auth.errors]);
+
+  //send info to logIn
   const [info, setInfo] = useState({
     email: "",
     password: "",
   });
-  const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
   const history = useHistory();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,6 +35,7 @@ const Login = () => {
       style={{ backgroundColor: "#c0c2c5" }}
     >
       <h1>Login Page</h1>
+      <Alert ops={ops} />
       <form
         onSubmit={handleSubmit}
         className="d-flex flex-column shadow form-group p-5 m-5 border border-success alert-light rounded "
@@ -63,12 +72,16 @@ const Login = () => {
         <hr />
         <div className="d-flex">
           <p>Do you want to have access?</p> &nbsp;
-          <Link to="/register" className=" text-primary text-decoration-none ">
+          <Link
+            to="/register"
+            className=" text-primary text-decoration-none "
+            onClick={() => dispatch(clearErr())}
+          >
             Register
           </Link>
         </div>
       </form>
-      <Alert message={auth.errors} />
+      {/* <Alert message={auth.errors} /> */}
     </div>
   );
 };

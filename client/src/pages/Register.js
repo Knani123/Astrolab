@@ -2,9 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import Alert from "../components/Alert";
-import { registerUser } from "../js/actions/authAction";
+import { registerUser, clearErr } from "../js/actions/authAction";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  // catch errors
+  const [ops, setOps] = useState([]);
+
+  useEffect(() => {
+    setOps(auth.errors);
+    setTimeout(() => setOps([]), 3000);
+  }, [auth.errors]);
+
+  //register info handle
   const [info, setInfo] = useState({
     lname: "",
     fname: "",
@@ -12,9 +23,6 @@ const Register = () => {
     email: "",
     password: "",
   });
-  const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
-  console.log(auth);
   const history = useHistory();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,6 +40,7 @@ const Register = () => {
       style={{ backgroundColor: "#c0c2c5" }}
     >
       <h1>Register Page</h1>
+      <Alert ops={ops} />
       <form
         onSubmit={handleSubmit}
         style={{ width: "400px" }}
@@ -101,12 +110,16 @@ const Register = () => {
         <hr />
         <div className="m-1 d-flex">
           <p>Do you already have access? </p> &nbsp;
-          <Link to="/login" className="text-success text-decoration-none">
+          <Link
+            to="/login"
+            className="text-success text-decoration-none"
+            onClick={() => dispatch(clearErr())}
+          >
             login
           </Link>
         </div>
       </form>
-      <Alert message={auth.errors} />
+      {/* <Alert message={auth.errors} /> */}
     </div>
   );
 };

@@ -4,6 +4,7 @@ import {
   ADD_Product_FAIL,
   GET_Product_LIST,
   GET_Product_LIST_FAIL,
+  CLEAR_ERR_PROD,
 } from "../actions/actionTypes";
 
 //Add  Product
@@ -17,7 +18,6 @@ export const addProduct = (info) => (dispatch) => {
       });
     })
     .catch((err) => {
-      console.log(err.response, info);
       dispatch({
         type: ADD_Product_FAIL,
         payload: err.response.data.errors,
@@ -41,4 +41,8 @@ export const getMyProducts = () => (dispatch) => {
         payload: err.response.data.errors,
       });
     });
+};
+//// Clear ERR
+export const clearErrProd = () => (dispatch) => {
+  dispatch({ type: CLEAR_ERR_PROD, payload: null });
 };

@@ -10,14 +10,7 @@ const ProductDetails = ({ product }) => {
   useEffect(() => {
     dispatch(getWishList());
   }, []);
-  // {
-  //   wishlist &&
-  //     product &&
-  //     wishlist.find((el) => el._id == product.assignedTo).name;
-  // }
-  // console.log(wishlist);
-  // console.log(product);
-  console.log(wishlist.find((el) => el._id == product.assignedTo));
+
   return (
     <div className="mt-5  mx-3 ">
       <div className="d-flex m-2 ">

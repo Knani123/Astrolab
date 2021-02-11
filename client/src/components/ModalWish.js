@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { clearErrwish } from "../js/actions/wishAction";
 import Modal from "react-modal";
 import { addWish } from "../js/actions/wishAction";
 const customStyles = {
@@ -14,16 +15,25 @@ const customStyles = {
 };
 
 const ModalWish = () => {
+  //handle errors
+  const wish = useSelector((state) => state.wish);
+  const [ops, setOps] = useState("");
+  useEffect(() => {
+    setOps(wish.errors && wish.errors[0].msg);
+  }, [wish.errors]);
+  // handle modal
   const dispatch = useDispatch();
   const [info, setInfo] = useState({ name: "" });
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
     setIsOpen(true);
+    dispatch(clearErrwish());
   }
 
   function closeModal() {
     setIsOpen(false);
+    dispatch(clearErrwish());
   }
   const clearInfo = () => {
     setInfo({ name: "" });
@@ -34,7 +44,7 @@ const ModalWish = () => {
     clearInfo({ name: "" });
     setTimeout(() => {
       closeModal();
-    }, 1500);
+    }, 15000);
   };
   const handleChange = (e) => {
     setInfo({ [e.target.id]: e.target.value });
@@ -80,6 +90,7 @@ const ModalWish = () => {
               onChange={handleChange}
             />
           </div>
+          <p className="text-center text-danger">{ops}</p>
           <hr />
           <div className="d-flex justify-content-end">
             <button

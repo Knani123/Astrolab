@@ -13,7 +13,6 @@ router.post(
   ],
 
   (req, res) => {
-    console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).send({ errors: errors.array() });
@@ -24,12 +23,11 @@ router.post(
             return res.status(400).send({
               errors: [
                 {
-                  msg: "Name existe",
+                  msg: "Name already used",
                 },
               ],
             });
           } else {
-            console.log(wish);
             let newWish = new Wish({
               ...req.body,
               owner: req.userId,

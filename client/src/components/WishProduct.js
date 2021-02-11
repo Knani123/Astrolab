@@ -1,7 +1,6 @@
 import React from "react";
 
 const WishProduct = ({ el }) => {
-  console.log(el);
   return (
     <div className="row " style={{ lineHeight: " 300%" }}>
       <span className="col-1 mx-3   text-center">

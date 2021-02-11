@@ -47,8 +47,7 @@ const Wishs = () => {
   // get ProductList
   const products = useSelector((state) => state.products);
   const productList = products.Products;
-  console.log("productList", productList);
-  console.log("wishlist", wishlist);
+
   return (
     <div className="container-fluid border border-secondary ">
       <div className="row">

@@ -13,3 +13,6 @@ export const ADD_Product = "ADD_Product";
 export const ADD_Product_FAIL = "ADD_Product_FAIL";
 export const GET_Product_LIST = "GET_Product_LIST";
 export const GET_Product_LIST_FAIL = "GET_Product_LIST_FAIL";
+export const CLEAR_ERR = "CLEAR_ERR";
+export const CLEAR_ERR_WISH = "CLEAR_ERR_WISH";
+export const CLEAR_ERR_PROD = "CLEAR_ERR_PROD";

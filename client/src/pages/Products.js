@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { getMyProducts } from "../js/actions/productAction";
+import { getMyProducts, clearErrProd } from "../js/actions/productAction";
+
 import AddProduct from "../components/AddProduct";
 import ProductDetails from "../components/ProductDetails";
 
@@ -14,7 +15,6 @@ const Products = () => {
   //get ProductList
   const products = useSelector((state) => state.products);
   const productList = products.Products;
-  console.log("myProduct", products);
   //add Product or display product
   const [display, setDisplay] = useState(true);
   //active wishLink
@@ -44,6 +44,7 @@ const Products = () => {
             onClick={() => {
               setDisplay(false);
               setActiv("");
+              dispatch(clearErrProd());
             }}
             className="btn btn-outline-primary  d-flex justify-content-around align-items-center m-2 mx-auto p-2 w-100 "
           >

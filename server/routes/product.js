@@ -13,6 +13,7 @@ router.post(
       body("name", "Name is empty! ").notEmpty().isLength({ min: 2, max: 20 }),
       body("descriptions", "descriptions is empty! ").notEmpty(),
       body("status", "status is empty! ").notEmpty(),
+      body("assignedTo", "Wishlist is empty! ").notEmpty(),
       body("price", "price must be numeric and not empty! ").isNumeric(),
     ],
   ],
@@ -28,7 +29,7 @@ router.post(
             return res.status(400).send({
               errors: [
                 {
-                  msg: "Name existe",
+                  msg: "Name already used ",
                 },
               ],
             });
@@ -44,7 +45,6 @@ router.post(
           }
         })
         .catch((err) => {
-          console.log(err);
           res.status(400).send(err);
         });
     }
@@ -61,7 +61,6 @@ router.post(
 //get products by owner
 // get Product list by assigned
 router.get("/owner", AuthMiddleware, (req, res) => {
-  console.log("req.userId", req.userId);
   Product.find({ owner: req.userId })
     .then((products) => res.send(products))
     .catch((err) => console.log(err.message));
