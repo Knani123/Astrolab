@@ -32,7 +32,7 @@ const Register = () => {
     setInfo({ ...info, [e.target.id]: e.target.value });
   };
   useEffect(() => {
-    auth.isAuth && history.push("/profile");
+    auth.isAuth && history.push("/");
   }, [auth]);
   return (
     <div
@@ -44,8 +44,13 @@ const Register = () => {
       <form
         onSubmit={handleSubmit}
         style={{ width: "400px" }}
-        className="d-flex flex-column shadow form-group p-5 border border-success alert-light rounded "
+        className="d-flex flex-column shadow form-group p-5 border border-success alert-light rounded position-relative"
       >
+        <span className="position-absolute m-2" style={{ top: "0", left: "0" }}>
+          <Link to="/" className="text-decoration-none">
+            <i className="fas fa-home"></i> Home
+          </Link>
+        </span>
         <label htmlFor="fname" className="mb-1">
           First name:
         </label>

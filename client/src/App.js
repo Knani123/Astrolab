@@ -8,12 +8,14 @@ import NavbarTop from "./NavbarTop";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Wishs from "./pages/Wishs";
 import Products from "./pages/Products";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <Router>
       <NavbarTop />
       <Switch>
+        <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <PrivateRoute path="/profile" component={Profile} />

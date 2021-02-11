@@ -6,24 +6,7 @@ import {
   CLEAR_ERR_PROD,
 } from "../actions/actionTypes";
 const initState = {
-  Products: [
-    {
-      _id: 1,
-      name: "sport",
-      Description: "blablabla",
-      image: "https://randomuser.me/api/portraits/men/75.jpg",
-      Status: "to buy",
-      Price: 700,
-    },
-    {
-      _id: 2,
-      name: "Hunt",
-      Description: "blablabla",
-      image: "Image",
-      Status: "Bought",
-      Price: 800,
-    },
-  ],
+  Products: [],
   errors: null,
 };
 

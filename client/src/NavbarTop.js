@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useHistory } from "react-router-dom";
 import { logOut } from "./js/actions/authAction";
 import myImage from "./gallery/myImage.PNG";
+import Alert from "./components/Alert";
 const NavbarTop = () => {
+  const history = useHistory();
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  // alert login or register
+  const [showAlert, setShowAlert] = useState(false);
+  const alertMSG = () => {
+    !auth.isAuth && setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 2000);
+  };
   //get User
   const [user, setUser] = useState({
     fname: "",
@@ -32,14 +42,30 @@ const NavbarTop = () => {
   };
   //log out
   const deconnect = () => {
-    dispatch(logOut());
+    if (auth.isAuth) {
+      dispatch(logOut());
+    } else {
+      history.push("/register");
+    }
   };
   return (
     <div style={{ display: handleDisplay(location.pathname) }}>
+      <div
+        className="w-100 position-absolute"
+        style={{ top: "0", left: "35%" }}
+      >
+        {showAlert && <Alert ops={[{ msg: "You must login or regiter" }]} />}
+      </div>
       <nav
         className="navbar navbar-expand-lg navbar-light bg-light px-2"
         style={{ paddingBottom: "0" }}
       >
+        <Link
+          class={`navbar-brand ${location.pathname == "/" && "text-primary"}`}
+          to="/"
+        >
+          <i className="fas fa-home"></i> Home
+        </Link>
         <div className="container-fluid">
           <button
             className="navbar-toggler"
@@ -61,7 +87,8 @@ const NavbarTop = () => {
                 <NavLink
                   className="nav-link  h-100"
                   aria-current="page"
-                  to="/wishs"
+                  to={auth.isAuth && `/wishs`}
+                  onClick={alertMSG}
                   activeClassName="text-primary "
                   activeStyle={{ borderBottom: "2px solid blue" }}
                 >
@@ -71,7 +98,8 @@ const NavbarTop = () => {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  to="/products"
+                  to={auth.isAuth && `/products`}
+                  onClick={alertMSG}
                   activeClassName="text-primary"
                   activeStyle={{ borderBottom: "2px solid blue" }}
                 >
@@ -104,33 +132,54 @@ const NavbarTop = () => {
                   aria-labelledby="navbarDropdownMenuLink"
                 >
                   <li>
-                    <Link className="dropdown-item" to="/profile">
+                    <Link
+                      className="dropdown-item"
+                      to={auth.isAuth ? "/profile" : "/login"}
+                    >
                       <button
-                        className="btn btn-info text-capitalize"
+                        className="btn btn-success text-capitalize"
                         style={{
                           padding: "2px",
                           fontSize: "12px",
                           color: "white",
                         }}
                       >
-                        <i className="fas fa-signature"></i>{" "}
-                        {user.fname ? user.fname : "User"}
+                        {auth.isAuth ? (
+                          <>
+                            <i className="fas fa-signature"></i>{" "}
+                            {user.fname ? user.fname : "User"}
+                          </>
+                        ) : (
+                          <>
+                            <i className="fas fa-sign-in-alt"></i> SignIn
+                          </>
+                        )}
                       </button>
                     </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item " href="#">
+                    <Link className="dropdown-item ">
                       <button
                         onClick={deconnect}
-                        className="btn btn-danger"
+                        className={`text-light btn btn-${
+                          auth.isAuth ? "danger" : "info"
+                        }`}
                         style={{
                           padding: "2px",
                           fontSize: "12px",
                         }}
                       >
-                        <i className="fas fa-power-off"></i> log out
+                        {auth.isAuth ? (
+                          <>
+                            <i className="fas fa-power-off"></i> Log out
+                          </>
+                        ) : (
+                          <>
+                            <i className="fas fa-file-contract "></i> Register
+                          </>
+                        )}
                       </button>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>

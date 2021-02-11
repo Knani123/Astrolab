@@ -9,10 +9,11 @@ import HeaderWish from "../components/HeaderWish";
 import ModalWish from "../components/ModalWish";
 import "./pages.css";
 const Wishs = () => {
+  const dispatch = useDispatch();
+
   //load wishList
   const wish = useSelector((state) => state.wish);
   const wishlist = wish.wishs;
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getWishList());
   }, []);

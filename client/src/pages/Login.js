@@ -27,7 +27,7 @@ const Login = () => {
     setInfo({ ...info, [e.target.id]: e.target.value });
   };
   useEffect(() => {
-    auth.isAuth && history.push("/profile");
+    auth.isAuth && history.push("/");
   }, [auth]);
   return (
     <div
@@ -38,9 +38,14 @@ const Login = () => {
       <Alert ops={ops} />
       <form
         onSubmit={handleSubmit}
-        className="d-flex flex-column shadow form-group p-5 m-5 border border-success alert-light rounded "
+        className="d-flex flex-column shadow form-group p-5 m-5 border border-success alert-light rounded position-relative"
         style={{ width: "400px" }}
       >
+        <span className="position-absolute m-2" style={{ top: "0", left: "0" }}>
+          <Link to="/" className="text-decoration-none">
+            <i className="fas fa-home"></i> Home
+          </Link>
+        </span>
         <label htmlFor="email" className="mb-1">
           Email:
         </label>
