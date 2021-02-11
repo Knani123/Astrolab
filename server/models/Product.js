@@ -7,6 +7,7 @@ const ProductSchema = new Schema({
   image: { type: String, required: false },
   status: { type: String, required: true },
   price: { type: Number, required: true },
+  currency: { type: String, required: true },
   assignedTo: { type: mongoose.Types.ObjectId, ref: "wish" },
   owner: { type: mongoose.Types.ObjectId, ref: "user" },
   create_date: { type: Date, default: Date.now },

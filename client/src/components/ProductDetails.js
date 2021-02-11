@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getWishList } from "../js/actions/wishAction";
+import { convert, currencySymbole } from "../currency";
+
 const ProductDetails = ({ product }) => {
-  const { _id, name, descriptions, image, status, price } = product;
+  //destruction product
+  const { _id, name, descriptions, image, status, price, currency } = product;
   //load wishList
   const wish = useSelector((state) => state.wish);
   const wishlist = wish.wishs;
@@ -10,6 +13,21 @@ const ProductDetails = ({ product }) => {
   useEffect(() => {
     dispatch(getWishList());
   }, []);
+
+  //handle currency (i used fetch because axios coz cros problem)
+  // const moneymoney = (CUR) => {
+  // fetch(
+  //   `https://free.currconv.com/api/v7/convert?q=${currency}_${CUR}&compact=ultra&apiKey=4cd0e09de123f7148e9b`
+  // )
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     // console.log(data);
+  //     return data;
+  //   });
+  // };
+
+  const currencies = useSelector((state) => state.currency);
+  // convert(currencies.currency, currency)
 
   return (
     <div className="mt-5  mx-3 ">
@@ -35,8 +53,19 @@ const ProductDetails = ({ product }) => {
               {descriptions}
             </p>
           </span>
-          <span className="d-flex">
-            Price: &nbsp; <h6>{price}</h6>
+          <span className="d-flex align-items-center border">
+            <span> Price: </span>
+            {currencies.currency ? (
+              <span style={{ fontWeight: "bold" }}>
+                {Math.round(price * convert(currencies.currency, currency)) +
+                  currencySymbole(currencies.currency)}
+              </span>
+            ) : (
+              <span style={{ fontWeight: "bold" }}>
+                &nbsp; {price}
+                {currencySymbole(currency)}
+              </span>
+            )}
           </span>
         </div>
         <span className="d-flex flex-column my-4">

@@ -8,7 +8,7 @@ import "./cmp.css";
 const AddProduct = () => {
   const dispatch = useDispatch();
   //get errors
-  const [ops, setOps] = useState("");
+  const [ops, setOps] = useState([{ msg: "" }]);
   const products = useSelector((state) => state.products);
   useEffect(() => {
     setOps(products.errors);
@@ -28,6 +28,7 @@ const AddProduct = () => {
       "https://img-0.journaldunet.com/pb5J23IF99HMY_P9HtO64G38epM=/1240x/smart/32d90de13a5f411c86709152f70fc67c/ccmcms-jdn/10861192.jpg",
     status: "",
     price: "",
+    currency: "",
     assignedTo: "",
   });
   const clearInfo = () => {
@@ -37,6 +38,7 @@ const AddProduct = () => {
       image: "",
       status: "",
       price: "",
+      currency: "",
       assignedTo: "",
     });
   };
@@ -54,7 +56,9 @@ const AddProduct = () => {
   return (
     <div className="  w-50 m-auto d-flex flex-column align-itmes-center">
       <h3 className="text-center m-4">Add Product</h3>
-      <Alert ops={ops} />
+      <h3 className="position-relative text-danger">
+        {ops && ops[0] && ops[0].msg}
+      </h3>
       <form
         className="border border-dark d-flex flex-column"
         onSubmit={handleSubmit}
@@ -87,9 +91,17 @@ const AddProduct = () => {
           </span>
           <span className="d-flex flex-column">
             <label htmlFor="">Currency</label>
-            <select name="" id="" className="select1" required>
-              <option value="Dinar">Dinar</option>
-              <option value="Dollar">Dollar</option>
+            <select
+              id="currency"
+              className="select1"
+              required
+              value={info.currency}
+              onChange={handleChange}
+            >
+              <option value="">-- Currency --</option>
+              <option value="USD">Dollar</option>
+              <option value="EUR">Euro</option>
+              <option value="TND">Dinar</option>
             </select>
           </span>
         </div>

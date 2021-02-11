@@ -1,9 +1,14 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { loadUser } from "../js/actions/authAction";
 import Alert from "../components/Alert";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadUser());
+  }, []);
   // alert login or register
   const [showAlert, setShowAlert] = useState(false);
   const auth = useSelector((state) => state.auth);

@@ -1,6 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { convert, currencySymbole } from "../currency";
 
 const WishProduct = ({ el }) => {
+  const currencies = useSelector((state) => state.currency);
+
   return (
     <div className="row " style={{ lineHeight: " 300%" }}>
       <span className="col-1 mx-3   text-center">
@@ -15,7 +19,22 @@ const WishProduct = ({ el }) => {
         {el.descriptions}
       </span>
       <span className="col-1 mx-3  ">{el.status}</span>
-      <span className="col-1 mx-3  ">{el.price}</span>
+      <span className="col-1 mx-3  ">
+        <span className="d-flex align-items-center border">
+          {currencies.currency ? (
+            <span style={{ fontWeight: "bold" }}>
+              {Math.round(
+                el.price * convert(currencies.currency, el.currency)
+              ) + currencySymbole(currencies.currency)}
+            </span>
+          ) : (
+            <span style={{ fontWeight: "bold" }}>
+              &nbsp; {el.price}
+              {currencySymbole(el.currency)}
+            </span>
+          )}
+        </span>
+      </span>
     </div>
   );
 };

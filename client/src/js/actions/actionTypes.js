@@ -16,3 +16,4 @@ export const GET_Product_LIST_FAIL = "GET_Product_LIST_FAIL";
 export const CLEAR_ERR = "CLEAR_ERR";
 export const CLEAR_ERR_WISH = "CLEAR_ERR_WISH";
 export const CLEAR_ERR_PROD = "CLEAR_ERR_PROD";
+export const SET_CURRENCY = "SET_CURRENCY";

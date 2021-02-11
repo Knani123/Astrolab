@@ -9,7 +9,7 @@ const AuthMiddleware = require("../helpers/authMidlewar");
 //login
 router.post(
   "/",
-  [body("email").isEmail(), body("password").notEmpty()],
+  [body("email", "Email invalid").isEmail(), body("password").notEmpty()],
   (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -17,9 +17,9 @@ router.post(
     } else
       User.findOne({ email: req.body.email }).then((user) => {
         if (!user) {
-          return res
-            .status(400)
-            .send({ errors: [{ msg: "You must register before" }] });
+          return res.status(400).send({
+            errors: [{ msg: "Email invalid,You must register before" }],
+          });
         } else {
           bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
             if (err) {

@@ -8,11 +8,11 @@ const Register = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   // catch errors
-  const [ops, setOps] = useState([]);
+  const [ops, setOps] = useState([{ msg: "" }]);
 
   useEffect(() => {
     setOps(auth.errors);
-    setTimeout(() => setOps([]), 3000);
+    setTimeout(() => setOps([{ msg: "" }]), 3000);
   }, [auth.errors]);
 
   //register info handle
@@ -40,12 +40,15 @@ const Register = () => {
       style={{ backgroundColor: "#c0c2c5" }}
     >
       <h1>Register Page</h1>
-      <Alert ops={ops} />
       <form
         onSubmit={handleSubmit}
         style={{ width: "400px" }}
-        className="d-flex flex-column shadow form-group p-5 border border-success alert-light rounded position-relative"
+        className="d-flex flex-column shadow form-group px-5 pt-5  border border-success alert-light rounded position-relative"
       >
+        <h5 className="position-relative text-danger">
+          {ops && ops[0] && ops[0].msg}
+        </h5>
+
         <span className="position-absolute m-2" style={{ top: "0", left: "0" }}>
           <Link to="/" className="text-decoration-none">
             <i className="fas fa-home"></i> Home

@@ -8,7 +8,7 @@ import { getWishList } from "../js/actions/wishAction";
 const Profile = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-
+  //load user and local it
   const [user, setUser] = useState({
     fname: "",
     lname: "",
@@ -76,15 +76,15 @@ const Profile = () => {
         <hr />
         <p className="alert alert-warning text-center">
           You have{" "}
-          {productList && (
-            <span style={{ fontWeight: "bold" }} className="text-dark">
-              {productList.length}
-            </span>
-          )}{" "}
-          Wishlists and{" "}
           {wishlist && (
             <span style={{ fontWeight: "bold" }} className="text-dark">
               {wishlist.length}
+            </span>
+          )}{" "}
+          Wishlists and{" "}
+          {productList && (
+            <span style={{ fontWeight: "bold" }} className="text-dark">
+              {productList.length}
             </span>
           )}{" "}
           Products

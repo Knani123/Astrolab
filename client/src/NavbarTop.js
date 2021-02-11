@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, NavLink, useLocation, useHistory } from "react-router-dom";
 import { logOut } from "./js/actions/authAction";
-import myImage from "./gallery/myImage.PNG";
+import { setCurrency } from "./js/actions/currencyAction";
 import Alert from "./components/Alert";
+import myImage from "./gallery/myImage.PNG";
+
 const NavbarTop = () => {
   const history = useHistory();
   const auth = useSelector((state) => state.auth);
@@ -28,9 +30,11 @@ const NavbarTop = () => {
   }, [auth]);
 
   //change currency
-  const [money, setMoney] = useState({ val: "TND" });
+  const [money, setMoney] = useState({ val: "", currency: "" });
   const handleClick = (e) => {
-    setMoney({ val: e.target.textContent });
+    setMoney({ val: e.target.textContent, currency: e.target.name });
+    console.log(money);
+    dispatch(setCurrency(e.target.name));
   };
 
   //display NavBar according to pathname
@@ -50,6 +54,11 @@ const NavbarTop = () => {
   };
   return (
     <div style={{ display: handleDisplay(location.pathname) }}>
+      {/* <select onChange={handleIt}>
+        <option value="TND">DINAR</option>
+        <option value="EUR">EURO</option>
+        <option value="USD">DOLLAr</option>
+      </select> */}
       <div
         className="w-100 position-absolute"
         style={{ top: "0", left: "35%" }}
@@ -194,25 +203,38 @@ const NavbarTop = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
+                  {money.val == "" && (
+                    <i className="fas fa-coins" title="choise currency"></i>
+                  )}
                   {money.val}
                 </a>
+
                 <ul
+                  id="money"
                   className="dropdown-menu "
                   aria-labelledby="navbarDropdownMenuLink"
                 >
-                  <li name="val" value="Dollar" onClick={handleClick}>
-                    <a className="dropdown-item" href="#">
+                  <li onClick={handleClick}>
+                    <a name="" className="dropdown-item " href="#">
+                      <i
+                        className="fas fa-coins text-success"
+                        title="origin currency"
+                      ></i>
+                    </a>
+                  </li>
+                  <li onClick={handleClick}>
+                    <a name="USD" className="dropdown-item" href="#">
                       Dollar
                     </a>
                   </li>
-                  <li name="val" value="dinar" onClick={handleClick}>
-                    <a className="dropdown-item" href="#">
-                      Dinar
+                  <li onClick={handleClick}>
+                    <a name="EUR" className="dropdown-item" href="#">
+                      Euro
                     </a>
                   </li>
-                  <li name="val" value="euro" onClick={handleClick}>
-                    <a className="dropdown-item" href="#">
-                      Euro
+                  <li onClick={handleClick}>
+                    <a name="TND" className="dropdown-item" href="#">
+                      Dinar
                     </a>
                   </li>
                 </ul>
