@@ -15,19 +15,27 @@ const ProductDetails = ({ product }) => {
   }, []);
 
   //handle currency (i used fetch because axios coz cros problem)
-  // const moneymoney = (CUR) => {
-  // fetch(
-  //   `https://free.currconv.com/api/v7/convert?q=${currency}_${CUR}&compact=ultra&apiKey=4cd0e09de123f7148e9b`
-  // )
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     // console.log(data);
-  //     return data;
-  //   });
-  // };
-
   const currencies = useSelector((state) => state.currency);
-  // convert(currencies.currency, currency)
+  const [coeff, setCoeff] = useState("");
+
+  const moneymoney = () => {
+    fetch(
+      // `https://free.currconv.com/api/v7/convert?q=${currency}_${currencies.currency}&compact=ultra&apiKey=7ba4fa27f0e8d7b0f3e7`
+      `https://free.currconv.com/api/v7/convert?q=${currency}_${currencies.currency}&compact=ultra&apiKey=4cd0e09de123f7148e9b`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("API Data", data);
+        let dataVal = Math.round(Object.values(data)[0] * 100) / 100;
+        setCoeff(isNaN(dataVal) ? "1" : dataVal);
+      });
+  };
+  useEffect(() => {
+    // moneymoney();
+  }, [currencies.currency]);
+  console.log("typeof coeff", coeff == NaN, typeof coeff);
+  /* convert(currencies.currency, currency)  function return sable currency
+   & currencySymbole set the currency symboles*/
 
   return (
     <div className="mt-5  mx-3 ">
@@ -57,8 +65,9 @@ const ProductDetails = ({ product }) => {
             <span> Price: </span>
             {currencies.currency ? (
               <span style={{ fontWeight: "bold" }}>
-                {Math.round(price * convert(currencies.currency, currency)) +
-                  currencySymbole(currencies.currency)}
+                {Math.round(
+                  price * /*coeff*/ convert(currencies.currency, currency)
+                ) + currencySymbole(currencies.currency)}
               </span>
             ) : (
               <span style={{ fontWeight: "bold" }}>

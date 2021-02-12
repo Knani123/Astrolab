@@ -29,14 +29,12 @@ const Profile = () => {
   //get ProductList
   const products = useSelector((state) => state.products);
   const productList = products.Products;
-  console.log("productList", productList.length);
   //load wishList
   const wish = useSelector((state) => state.wish);
   const wishlist = wish.wishs;
   useEffect(() => {
     dispatch(getWishList());
   }, []);
-  console.log("wishlist", wishlist.length);
 
   return (
     <div

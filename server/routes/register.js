@@ -26,9 +26,9 @@ router.post(
       User.find({ email: req.body.email })
         .then((users) => {
           if (users.length) {
-            return res
-              .status(400)
-              .send({ errors: [{ msg: "Email is already used" }] });
+            return res.status(400).send({
+              errors: [{ msg: "Email has been already registered" }],
+            });
           } else {
             let newUser = new User(req.body);
             bcrypt.genSalt(10, (err, salt) => {
