@@ -4,6 +4,8 @@ import {
   GET_WISH_LIST,
   GET_WISH_LIST_FAIL,
   CLEAR_ERR_WISH,
+  DELETE_WISH_SUCCESS,
+  DELETE_WISH_SUCCESS_FAIL,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -46,4 +48,19 @@ export const getWishList = () => (dispatch) => {
 //// Clear ERR
 export const clearErrwish = () => (dispatch) => {
   dispatch({ type: CLEAR_ERR_WISH, payload: null });
+};
+//delete Wishlist
+export const deleteWish = (id) => (dispatch) => {
+  axios
+    .delete(`wish/${id}`)
+    .then(() => {
+      dispatch(getWishList());
+      dispatch({ type: DELETE_WISH_SUCCESS });
+    })
+    .catch((err) => {
+      dispatch({
+        type: DELETE_WISH_SUCCESS_FAIL,
+        payload: err.response.data.errors,
+      });
+    });
 };

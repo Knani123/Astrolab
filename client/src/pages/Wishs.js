@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getWishList } from "../js/actions/wishAction";
+import { getWishList, deleteWish } from "../js/actions/wishAction";
 import { addWish } from "../js/actions/wishAction";
-import { getMyProducts } from "../js/actions/productAction";
+import { getMyProducts, deleteproduct } from "../js/actions/productAction";
+
 import WishProduct from "../components/WishProduct";
 import HeaderWish from "../components/HeaderWish";
 import ModalWish from "../components/ModalWish";
@@ -49,6 +50,21 @@ const Wishs = () => {
   const products = useSelector((state) => state.products);
   const productList = products.Products;
 
+  //delete wishlist and its products
+  function deleteIt() {
+    const confirm = window.confirm(
+      `do you really want to delete ${myWish.name} and all its products?? `
+    );
+    console.log("products", productList);
+    if (confirm) {
+      //delete its products
+      productList
+        .filter((el) => el.assignedTo == activ)
+        .map((el) => dispatch(deleteproduct(el._id)));
+      //delete wishlist
+      dispatch(deleteWish(myWish._id));
+    }
+  }
   return (
     <div className="container-fluid border border-secondary ">
       <div className="row">
@@ -81,7 +97,19 @@ const Wishs = () => {
               <span>
                 <i className="far fa-edit"></i> Edit
               </span>
-              <span className="text-danger">
+              <span
+                className="text-danger border"
+                onClick={deleteIt}
+                onMouseMove={(e) => {
+                  e.target.classList.remove("text-danger");
+                  e.target.style.color = "red";
+                }}
+                onMouseOut={(e) => {
+                  e.target.classList.add("text-danger");
+                  e.target.style.color = "";
+                }}
+                style={{ cursor: "pointer" }}
+              >
                 <i className="far fa-trash-alt"></i> Delete
               </span>
             </div>

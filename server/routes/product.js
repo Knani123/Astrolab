@@ -52,18 +52,16 @@ router.post(
 );
 
 // get Product list by assigned
-// router.get("/:id", AuthMiddleware, (req, res) => {
-//   console.log(req.userId);
-//   Product.find(req.params.id)
-//     .then((products) => res.send(products))
-//     .catch((err) => console.log(err.message));
-// });
-//get products by owner
-// get Product list by assigned
 router.get("/owner", AuthMiddleware, (req, res) => {
   Product.find({ owner: req.userId })
     .then((products) => res.send(products))
     .catch((err) => console.log(err.message));
 });
 
+//delete Product by id
+router.delete("/:id", AuthMiddleware, (req, res) => {
+  Product.deleteOne({ _id: req.params.id })
+    .then(() => res.send({ msg: "Your Product is deleted" }))
+    .catch((err) => console.log(err.message));
+});
 module.exports = router;

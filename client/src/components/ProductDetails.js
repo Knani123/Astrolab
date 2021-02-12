@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getWishList } from "../js/actions/wishAction";
+import { deleteproduct } from "../js/actions/productAction";
+
 import { convert, currencySymbole } from "../currency";
 
 const ProductDetails = ({ product }) => {
@@ -37,6 +39,13 @@ const ProductDetails = ({ product }) => {
   /* convert(currencies.currency, currency)  function return sable currency
    & currencySymbole set the currency symboles*/
 
+  //delete wish
+  function deleteIt() {
+    const confirm = window.confirm(`do you really want to delete ${name} `);
+    if (confirm) {
+      dispatch(deleteproduct(_id));
+    }
+  }
   return (
     <div className="mt-5  mx-3 ">
       <div className="d-flex m-2 ">
@@ -65,13 +74,16 @@ const ProductDetails = ({ product }) => {
             <span> Price: </span>
             {currencies.currency ? (
               <span style={{ fontWeight: "bold" }}>
+                &nbsp;
                 {Math.round(
                   price * /*coeff*/ convert(currencies.currency, currency)
-                ) + currencySymbole(currencies.currency)}
+                )}
+                &nbsp;
+                {currencySymbole(currencies.currency)}
               </span>
             ) : (
               <span style={{ fontWeight: "bold" }}>
-                &nbsp; {price}
+                &nbsp; {price}&nbsp;
                 {currencySymbole(currency)}
               </span>
             )}
@@ -81,7 +93,19 @@ const ProductDetails = ({ product }) => {
           <span>
             <i className="far fa-edit"></i> Edit
           </span>
-          <span className="text-danger">
+          <span
+            className="text-danger border"
+            onClick={deleteIt}
+            onMouseMove={(e) => {
+              e.target.classList.remove("text-danger");
+              e.target.style.color = "red";
+            }}
+            onMouseOut={(e) => {
+              e.target.classList.add("text-danger");
+              e.target.style.color = "";
+            }}
+            style={{ cursor: "pointer" }}
+          >
             <i className="far fa-trash-alt "></i> Delete
           </span>
         </span>

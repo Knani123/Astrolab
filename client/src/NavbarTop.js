@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, NavLink, useLocation, useHistory } from "react-router-dom";
 import { logOut } from "./js/actions/authAction";
 import { setCurrency } from "./js/actions/currencyAction";
 import Alert from "./components/Alert";
 import myImage from "./gallery/myImage.PNG";
-
+import coin from "./gallery/coin.mp3";
 const NavbarTop = () => {
   const history = useHistory();
   const auth = useSelector((state) => state.auth);
@@ -35,6 +35,7 @@ const NavbarTop = () => {
     setMoney({ val: e.target.textContent, currency: e.target.name });
     console.log(money);
     dispatch(setCurrency(e.target.name));
+    coinSound();
   };
 
   //display NavBar according to pathname
@@ -52,13 +53,19 @@ const NavbarTop = () => {
       history.push("/register");
     }
   };
+  //sound effect
+  const sound = useRef();
+  const coinSound = () => {
+    sound.current.play();
+  };
   return (
     <div style={{ display: handleDisplay(location.pathname) }}>
-      {/* <select onChange={handleIt}>
-        <option value="TND">DINAR</option>
-        <option value="EUR">EURO</option>
-        <option value="USD">DOLLAr</option>
-      </select> */}
+      <audio
+        src={coin}
+        style={{ display: "none" }}
+        id="audio"
+        ref={sound}
+      ></audio>
       <div
         className="w-100 position-absolute"
         style={{ top: "0", left: "35%" }}

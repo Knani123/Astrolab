@@ -50,4 +50,10 @@ router.get("/", AuthMiddleware, (req, res) => {
     .catch((err) => console.log(err.message));
 });
 
+//delet wish by id
+router.delete("/:id", AuthMiddleware, (req, res) => {
+  Wish.deleteOne({ _id: req.params.id })
+    .then(() => res.send({ msg: "Your Wishlist is deleted" }))
+    .catch((err) => console.log(err.message));
+});
 module.exports = router;

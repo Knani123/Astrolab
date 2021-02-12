@@ -44,13 +44,15 @@ const WishProduct = ({ el }) => {
         <span className="d-flex align-items-center border">
           {currencies.currency ? (
             <span style={{ fontWeight: "bold" }}>
+              &nbsp;
               {Math.round(
                 el.price * /* coeff */ convert(currencies.currency, el.currency)
-              ) + currencySymbole(currencies.currency)}
+              )}
+              &nbsp;{currencySymbole(currencies.currency)}
             </span>
           ) : (
             <span style={{ fontWeight: "bold" }}>
-              &nbsp; {el.price}
+              &nbsp; {el.price}&nbsp;
               {currencySymbole(el.currency)}
             </span>
           )}

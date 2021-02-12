@@ -5,6 +5,8 @@ import {
   GET_Product_LIST,
   GET_Product_LIST_FAIL,
   CLEAR_ERR_PROD,
+  DELETE_PRODUCT_SUCCESS,
+  DELETE_PRODUCT_SUCCESS_FAIL,
 } from "../actions/actionTypes";
 
 //Add  Product
@@ -45,4 +47,19 @@ export const getMyProducts = () => (dispatch) => {
 //// Clear ERR
 export const clearErrProd = () => (dispatch) => {
   dispatch({ type: CLEAR_ERR_PROD, payload: null });
+};
+
+export const deleteproduct = (id) => (dispatch) => {
+  axios
+    .delete(`product/${id}`)
+    .then(() => {
+      dispatch(getMyProducts());
+      dispatch({ type: DELETE_PRODUCT_SUCCESS });
+    })
+    .catch((err) => {
+      dispatch({
+        type: DELETE_PRODUCT_SUCCESS_FAIL,
+        payload: err.response.data.errors,
+      });
+    });
 };
