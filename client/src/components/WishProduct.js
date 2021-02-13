@@ -28,11 +28,18 @@ const WishProduct = ({ el }) => {
   return (
     <div className="row " style={{ lineHeight: " 300%" }}>
       <span className="col-1 mx-3   text-center">
-        <img
-          src={el.image}
-          alt=""
-          style={{ width: "40px", borderRadius: "50%" }}
-        />
+        <a href={el.image} target="_blank">
+          <img
+            src={el.image}
+            alt=""
+            style={{ width: "100px" }}
+            onMouseOver={(e) => {
+              e.target.style.transition = "0.4s";
+              e.target.style.transform = "scale(1.1)";
+            }}
+            onMouseOut={(e) => (e.target.style.transform = "scale(0.9)")}
+          />
+        </a>
       </span>
       <span className="col-2  ">{el.name}</span>
       <span className="col overflow-auto " style={{ maxHeight: "140px" }}>

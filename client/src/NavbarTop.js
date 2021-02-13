@@ -222,27 +222,27 @@ const NavbarTop = () => {
                   aria-labelledby="navbarDropdownMenuLink"
                 >
                   <li onClick={handleClick}>
-                    <a name="" className="dropdown-item " href="#">
+                    <Link name="" className="dropdown-item ">
                       <i
                         className="fas fa-coins text-success"
                         title="origin currency"
                       ></i>
-                    </a>
+                    </Link>
                   </li>
                   <li onClick={handleClick}>
-                    <a name="USD" className="dropdown-item" href="#">
+                    <Link name="USD" className="dropdown-item">
                       Dollar
-                    </a>
+                    </Link>
                   </li>
                   <li onClick={handleClick}>
-                    <a name="EUR" className="dropdown-item" href="#">
+                    <Link name="EUR" className="dropdown-item">
                       Euro
-                    </a>
+                    </Link>
                   </li>
                   <li onClick={handleClick}>
-                    <a name="TND" className="dropdown-item" href="#">
+                    <Link name="TND" className="dropdown-item">
                       Dinar
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>

@@ -9,6 +9,7 @@ import { convert, currencySymbole } from "../currency";
 const ProductDetails = ({ product }) => {
   //destruction product
   const { _id, name, descriptions, image, status, price, currency } = product;
+  console.log("image", image);
   //load wishList
   const wish = useSelector((state) => state.wish);
   const wishlist = wish.wishs;
@@ -51,11 +52,11 @@ const ProductDetails = ({ product }) => {
     <div className="mt-5  mx-3 ">
       <div className="d-flex m-2 ">
         <img
-          src="https://whyfutz.com/wp-content/uploads/2020/04/product.jpg"
+          src={image}
           alt=""
           width="50%"
           style={{ height: "200px" }}
-          className=" mt-5 border"
+          className=" mt-5 border shadow"
         />
         <div
           // style={{ width: "300px" }}
@@ -92,7 +93,7 @@ const ProductDetails = ({ product }) => {
         </div>
         <span className="d-flex flex-column my-4">
           <ModalEditProduct product={product} />
-          <span style={{ cursor: "pointer", color: "red" }}>
+          <span style={{ cursor: "pointer", color: "red" }} onClick={deleteIt}>
             <i className="far fa-trash-alt "></i> Delete
           </span>
         </span>

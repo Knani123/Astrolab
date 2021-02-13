@@ -72,7 +72,7 @@ const ModalEditProduct = ({ product }) => {
 
   function closeModal() {
     setIsOpen(false);
-    history.push("/load2");
+    history.push("/load");
   }
 
   //dispatch Add action

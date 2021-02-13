@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { getWishList, deleteWish } from "../js/actions/wishAction";
 import { addWish } from "../js/actions/wishAction";
 import { getMyProducts, deleteproduct } from "../js/actions/productAction";
-
 import WishProduct from "../components/WishProduct";
 import HeaderWish from "../components/HeaderWish";
 import ModalWish from "../components/ModalWish";
@@ -12,7 +12,7 @@ import "./pages.css";
 import EditWish from "../components/EditWish";
 const Wishs = () => {
   const dispatch = useDispatch();
-
+  const history = useHistory();
   //load wishList
   const wish = useSelector((state) => state.wish);
   const wishlist = wish.wishs;
@@ -64,6 +64,7 @@ const Wishs = () => {
         .map((el) => dispatch(deleteproduct(el._id)));
       //delete wishlist
       dispatch(deleteWish(myWish._id));
+      history.push("./load2");
     }
   }
   return (

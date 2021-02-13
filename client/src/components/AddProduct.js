@@ -5,6 +5,7 @@ import { addProduct, clearErrProd } from "../js/actions/productAction";
 import Product from "../gallery/Product.png";
 import Alert from "./Alert";
 import "./cmp.css";
+import axios from "axios";
 const AddProduct = () => {
   const dispatch = useDispatch();
   //get errors
@@ -24,6 +25,7 @@ const AddProduct = () => {
     dispatch(getWishList());
   }, []);
   //change info to add product
+  const [file, setFile] = useState(null);
   const [info, setInfo] = useState({
     name: "",
     descriptions: "",
@@ -48,14 +50,23 @@ const AddProduct = () => {
   const handleChange = (e) => {
     setInfo({ ...info, [e.target.id]: e.target.value });
   };
+  //select Image
+  const selectImage = (e) => {
+    setFile(e.target.files[0]);
+  };
   //submit Product info
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    dispatch(addProduct(info));
-
-    // clearInfo();
+    //add image
+    let formData = new FormData();
+    formData.append("avatar", file);
+    axios
+      .post("/img", formData)
+      .then((res) =>
+        dispatch(addProduct({ ...info, image: res.data.imageName }))
+      );
   };
+
   return (
     <div className="  w-50 m-auto d-flex flex-column align-itmes-center">
       <h3 className="text-center m-4">Add Product</h3>
@@ -68,6 +79,7 @@ const AddProduct = () => {
       >
         <div className="mx-auto my-2">
           <img src={Product} alt="add Logo" width="150px" />
+          <input type="file" name="avatar" onChange={selectImage} required />
         </div>
         <div className="d-flex justify-content-evenly my-2">
           <span className="d-flex flex-column">
