@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Wishs from "./pages/Wishs";
 import Products from "./pages/Products";
 import Home from "./pages/Home";
+import Load from "./components/Load";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <PrivateRoute path="/profile" component={Profile} />
         <PrivateRoute path="/wishs" component={Wishs} />
         <PrivateRoute path="/products" component={Products} />
+        <PrivateRoute path="/load" component={Load} />
       </Switch>
     </Router>
   );

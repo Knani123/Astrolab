@@ -38,10 +38,11 @@ const ModalWish = () => {
   const clearInfo = () => {
     setInfo({ name: "" });
   };
+  //dispatch Add action
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addWish(info));
-    clearInfo({ name: "" });
     setTimeout(() => {
       closeModal();
     }, 15000);
@@ -87,6 +88,7 @@ const ModalWish = () => {
               id="name"
               className="form-control p-2 "
               placeholder="Add Name"
+              required
               onChange={handleChange}
             />
           </div>

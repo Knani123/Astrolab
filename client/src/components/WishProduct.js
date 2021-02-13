@@ -15,7 +15,7 @@ const WishProduct = ({ el }) => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log("API Data", data);
+        // console.log("API Data", data);
         let dataVal = Math.round(Object.values(data)[0] * 100) / 100;
         setCoeff(isNaN(dataVal) ? "1" : dataVal);
       });
@@ -23,7 +23,6 @@ const WishProduct = ({ el }) => {
   useEffect(() => {
     // moneymoney();
   }, [currencies.currency]);
-  console.log("coeff NaN", isNaN(coeff));
   /* convert(currencies.currency, currency)  function return sable currency
    & currencySymbole set the currency symboles*/
   return (

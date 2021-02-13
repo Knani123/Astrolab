@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getWishList } from "../js/actions/wishAction";
 import { deleteproduct } from "../js/actions/productAction";
-
+import ModalEditProduct from "./ModalEditProduct";
 import { convert, currencySymbole } from "../currency";
+// import EditProduct from "./EditProduct";
 
 const ProductDetails = ({ product }) => {
   //destruction product
@@ -41,7 +42,7 @@ const ProductDetails = ({ product }) => {
 
   //delete wish
   function deleteIt() {
-    const confirm = window.confirm(`do you really want to delete ${name} `);
+    const confirm = window.confirm(`Do you really want to delete ${name} `);
     if (confirm) {
       dispatch(deleteproduct(_id));
     }
@@ -90,9 +91,10 @@ const ProductDetails = ({ product }) => {
           </span>
         </div>
         <span className="d-flex flex-column my-4">
-          <span>
+          <ModalEditProduct product={product} />
+          {/* <span>
             <i className="far fa-edit"></i> Edit
-          </span>
+          </span> */}
           <span
             className="text-danger border"
             onClick={deleteIt}

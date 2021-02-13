@@ -53,7 +53,7 @@ const Wishs = () => {
   //delete wishlist and its products
   function deleteIt() {
     const confirm = window.confirm(
-      `do you really want to delete ${myWish.name} and all its products?? `
+      `Do you really want to delete ${myWish.name} and all its products?? `
     );
     console.log("products", productList);
     if (confirm) {

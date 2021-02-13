@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getWishList } from "../js/actions/wishAction";
-import { addProduct } from "../js/actions/productAction";
+import { addProduct, clearErrProd } from "../js/actions/productAction";
 import Product from "../gallery/Product.png";
 import Alert from "./Alert";
 import "./cmp.css";
@@ -12,7 +12,10 @@ const AddProduct = () => {
   const products = useSelector((state) => state.products);
   useEffect(() => {
     setOps(products.errors);
-    setTimeout(() => setOps([]), 3000);
+    setTimeout(() => {
+      dispatch(clearErrProd());
+      setOps([]);
+    }, 3000);
   }, [products.errors]);
   //load wishList to map them in whislist select
   const wish = useSelector((state) => state.wish);

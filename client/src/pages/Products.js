@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getMyProducts, clearErrProd } from "../js/actions/productAction";
-
 import AddProduct from "../components/AddProduct";
 import ProductDetails from "../components/ProductDetails";
 
@@ -12,6 +11,7 @@ const Products = () => {
   useEffect(() => {
     dispatch(getMyProducts());
   }, []);
+
   //get ProductList
   const products = useSelector((state) => state.products);
   const productList = products.Products;

@@ -7,6 +7,8 @@ import {
   CLEAR_ERR_PROD,
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_SUCCESS_FAIL,
+  EDIT_PRODUCT,
+  EDIT_PRODUCT_FAIL,
 } from "../actions/actionTypes";
 
 //Add  Product
@@ -44,11 +46,12 @@ export const getMyProducts = () => (dispatch) => {
       });
     });
 };
+
 //// Clear ERR
 export const clearErrProd = () => (dispatch) => {
   dispatch({ type: CLEAR_ERR_PROD, payload: null });
 };
-
+//delete product
 export const deleteproduct = (id) => (dispatch) => {
   axios
     .delete(`product/${id}`)
@@ -59,6 +62,25 @@ export const deleteproduct = (id) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: DELETE_PRODUCT_SUCCESS_FAIL,
+        payload: err.response.data.errors,
+      });
+    });
+};
+//Edit product
+export const editProduct = (id, info) => (dispatch) => {
+  console.log(id, info);
+  axios
+    .put(`/product/${id}`, info)
+    .then(() => {
+      dispatch(getMyProducts());
+      dispatch({
+        type: EDIT_PRODUCT,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: EDIT_PRODUCT_FAIL,
         payload: err.response.data.errors,
       });
     });

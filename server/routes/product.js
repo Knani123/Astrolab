@@ -64,4 +64,38 @@ router.delete("/:id", AuthMiddleware, (req, res) => {
     .then(() => res.send({ msg: "Your Product is deleted" }))
     .catch((err) => console.log(err.message));
 });
+
+//Edit Product
+router.put("/:id", AuthMiddleware, (req, res) => {
+  console.log(req.body.name);
+  Product.find({ name: req.body.name }).then((product) => {
+    if (product.length && product[0]._id != req.params.id) {
+      return res.status(400).send({
+        errors: [
+          {
+            msg: "Name already  used. Please try another . ",
+          },
+        ],
+      });
+    } else {
+      Product.findByIdAndUpdate(
+        req.params.id,
+        { $set: { ...req.body } },
+        (err, data) => {
+          if (err) {
+            return res.send(500).send({ msg: "Server Errors" });
+          } else {
+            Product.findById(req.params.id)
+              .then((porduct) => {
+                res.status(200).send(porduct);
+              })
+              .catch((err) => {
+                res.send(500).send({ msg: "Server Errors" });
+              });
+          }
+        }
+      );
+    }
+  });
+});
 module.exports = router;
