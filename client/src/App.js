@@ -10,6 +10,7 @@ import Wishs from "./pages/Wishs";
 import Products from "./pages/Products";
 import Home from "./pages/Home";
 import Load from "./components/Load";
+import Loading from "./components/Load2";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <PrivateRoute path="/wishs" component={Wishs} />
         <PrivateRoute path="/products" component={Products} />
         <PrivateRoute path="/load" component={Load} />
+        <PrivateRoute path="/load2" component={Loading} />
       </Switch>
     </Router>
   );

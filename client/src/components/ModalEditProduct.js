@@ -68,14 +68,11 @@ const ModalEditProduct = ({ product }) => {
       currency,
       assignedTo,
     });
-
-    // dispatch(clearErrwish());
   }
 
   function closeModal() {
     setIsOpen(false);
-    // history.push("/load");
-    // dispatch(clearErrwish());
+    history.push("/load2");
   }
 
   //dispatch Add action
@@ -97,13 +94,21 @@ const ModalEditProduct = ({ product }) => {
       setOps([]);
     }, 3000);
   }, [products.errors]);
-  console.log("ops", ops);
-  console.log(products.errors && products.errors[0].msg);
+
   //get product list
   return (
     <div>
-      <span onClick={openModal}>
-        <i className="far fa-edit"></i> Edit
+      <span
+        onClick={openModal}
+        onMouseOver={(e) => {
+          e.target.style.color = "#FFC312 ";
+          e.target.style.cursor = "pointer";
+        }}
+        onMouseOut={(e) => (e.target.style.color = "")}
+      >
+        <span>
+          <i className="far fa-edit"></i> Edit
+        </span>
       </span>
       <Modal
         isOpen={modalIsOpen}
@@ -129,7 +134,7 @@ const ModalEditProduct = ({ product }) => {
           ></i>
         </div>
         <form
-          className="border border-dark d-flex flex-column"
+          className="border border-dark d-flex flex-column p-2"
           onSubmit={handleSubmit}
         >
           <div className="d-flex justify-content-evenly my-2">
@@ -182,7 +187,7 @@ const ModalEditProduct = ({ product }) => {
               id="descriptions"
               cols="30"
               rows="3"
-              className="from-control"
+              className="from-control border"
             ></textarea>
           </span>
           <div className="d-flex justify-content-evenly">
@@ -217,7 +222,9 @@ const ModalEditProduct = ({ product }) => {
               </select>
             </div>
           </div>
-          <div className="d-flex justify-content-end mt-4 m-1">
+          <hr />
+
+          <div className="d-flex justify-content-end  m-1">
             <button
               className="m-1 btn btn-outline-primary"
               type="reset"

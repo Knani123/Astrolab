@@ -9,6 +9,7 @@ import WishProduct from "../components/WishProduct";
 import HeaderWish from "../components/HeaderWish";
 import ModalWish from "../components/ModalWish";
 import "./pages.css";
+import EditWish from "../components/EditWish";
 const Wishs = () => {
   const dispatch = useDispatch();
 
@@ -94,9 +95,11 @@ const Wishs = () => {
               className="d-flex  align-items-center justify-content-around"
               style={{ width: "200px" }}
             >
-              <span>
+              {/* <span>
                 <i className="far fa-edit"></i> Edit
-              </span>
+              </span> */}
+              {/* Edit Modal */}
+              <EditWish myWish={myWish && myWish} />
               <span
                 className="text-danger border"
                 onClick={deleteIt}

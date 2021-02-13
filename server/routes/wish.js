@@ -56,4 +56,38 @@ router.delete("/:id", AuthMiddleware, (req, res) => {
     .then(() => res.send({ msg: "Your Wishlist is deleted" }))
     .catch((err) => console.log(err.message));
 });
+
+//Edit Product
+router.put("/:id", AuthMiddleware, (req, res) => {
+  console.log(req.body.name);
+  Wish.find({ name: req.body.name }).then((wish) => {
+    if (wish.length && wish[0]._id != req.params.id) {
+      return res.status(400).send({
+        errors: [
+          {
+            msg: "Name already  used. Please try another . ",
+          },
+        ],
+      });
+    } else {
+      Wish.findByIdAndUpdate(
+        req.params.id,
+        { $set: { ...req.body } },
+        (err, data) => {
+          if (err) {
+            return res.send(500).send({ msg: "Server Errors" });
+          } else {
+            Wish.findById(req.params.id)
+              .then((wish) => {
+                res.status(200).send(wish);
+              })
+              .catch((err) => {
+                res.send(500).send({ msg: "Server Errors" });
+              });
+          }
+        }
+      );
+    }
+  });
+});
 module.exports = router;

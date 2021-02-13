@@ -6,6 +6,8 @@ import {
   CLEAR_ERR_WISH,
   DELETE_WISH_SUCCESS,
   DELETE_WISH_SUCCESS_FAIL,
+  EDIT_WISH,
+  EDIT_WISH_FAIL,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -60,6 +62,26 @@ export const deleteWish = (id) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: DELETE_WISH_SUCCESS_FAIL,
+        payload: err.response.data.errors,
+      });
+    });
+};
+//Edit wish
+
+export const editWish = (id, info) => (dispatch) => {
+  console.log("editwish", id, info);
+  axios
+    .put(`/wish/${id}`, info)
+    .then(() => {
+      dispatch(getWishList());
+      dispatch({
+        type: EDIT_WISH,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: EDIT_WISH_FAIL,
         payload: err.response.data.errors,
       });
     });

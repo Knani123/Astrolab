@@ -92,22 +92,7 @@ const ProductDetails = ({ product }) => {
         </div>
         <span className="d-flex flex-column my-4">
           <ModalEditProduct product={product} />
-          {/* <span>
-            <i className="far fa-edit"></i> Edit
-          </span> */}
-          <span
-            className="text-danger border"
-            onClick={deleteIt}
-            onMouseMove={(e) => {
-              e.target.classList.remove("text-danger");
-              e.target.style.color = "red";
-            }}
-            onMouseOut={(e) => {
-              e.target.classList.add("text-danger");
-              e.target.style.color = "";
-            }}
-            style={{ cursor: "pointer" }}
-          >
+          <span style={{ cursor: "pointer", color: "red" }}>
             <i className="far fa-trash-alt "></i> Delete
           </span>
         </span>

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { clearErrwish } from "../js/actions/wishAction";
+import { addWish, editWish } from "../js/actions/wishAction";
 import Modal from "react-modal";
-import { addWish } from "../js/actions/wishAction";
+
 const customStyles = {
   content: {
     top: "50%",
@@ -14,16 +16,24 @@ const customStyles = {
   },
 };
 
-const ModalWish = () => {
+const EditWish = ({ myWish }) => {
+  //useHistory
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   //handle errors
   const wish = useSelector((state) => state.wish);
   const [ops, setOps] = useState("");
   useEffect(() => {
     setOps(wish.errors && wish.errors[0].msg);
   }, [wish.errors]);
+  //   handle info
+  const [info, setInfo] = useState({ name: myWish && myWish.name });
+  useEffect(() => {
+    setInfo({ name: myWish && myWish.name });
+  }, [myWish]);
   // handle modal
-  const dispatch = useDispatch();
-  const [info, setInfo] = useState({ name: "" });
+
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -33,6 +43,7 @@ const ModalWish = () => {
 
   function closeModal() {
     setIsOpen(false);
+    history.push("/load2");
     dispatch(clearErrwish());
   }
   const clearInfo = () => {
@@ -42,19 +53,23 @@ const ModalWish = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addWish(info));
+
+    dispatch(editWish(myWish && myWish._id, info));
+
+    // setTimeout(() => {
+    //   closeModal();
+    // }, 15000);
   };
   const handleChange = (e) => {
     setInfo({ [e.target.id]: e.target.value });
   };
+
   return (
     <div>
-      <button
-        className="btn btn-outline-primary  d-flex justify-content-around align-items-center my-2 mx-auto p-2 w-100"
-        onClick={openModal}
-      >
-        <i className="fas fa-plus "></i> <span>Add wishlist</span>
-      </button>
+      <span onClick={openModal}>
+        <i className="far fa-edit"></i> Edit
+      </span>
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -65,7 +80,7 @@ const ModalWish = () => {
           className="d-flex align-items-center justify-content-between  mb-3"
           style={{ width: "400px" }}
         >
-          <h4>Add wishList</h4>
+          <h4>Edit wishList</h4>
           <i
             className="fas fa-times "
             style={{ cursor: "pointer" }}
@@ -81,6 +96,7 @@ const ModalWish = () => {
               Name
             </label>
             <input
+              value={info.name}
               type="text"
               id="name"
               className="form-control p-2 "
@@ -108,4 +124,4 @@ const ModalWish = () => {
   );
 };
 
-export default ModalWish;
+export default EditWish;
