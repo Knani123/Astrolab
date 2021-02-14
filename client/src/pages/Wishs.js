@@ -67,6 +67,17 @@ const Wishs = () => {
       history.push("./load2");
     }
   }
+  //handle statue
+  const [proStatus, setProStatus] = useState(null);
+  console.log(proStatus);
+  useEffect(() => {
+    setProStatus(null);
+  }, []);
+  const borderIt = () => {
+    return { outline: "5px solid yellow" };
+  };
+  //handle view
+  const [view, setView] = useState("list");
   return (
     <div className="container-fluid border border-secondary ">
       <div className="row">
@@ -96,10 +107,6 @@ const Wishs = () => {
               className="d-flex  align-items-center justify-content-around"
               style={{ width: "200px" }}
             >
-              {/* <span>
-                <i className="far fa-edit"></i> Edit
-              </span> */}
-              {/* Edit Modal */}
               <EditWish myWish={myWish && myWish} />
               <span
                 className="text-danger border"
@@ -121,41 +128,74 @@ const Wishs = () => {
 
           <div className="d-flex align-items-center justify-content-between border border-secondary p-3  m-3">
             <div
-              className="d-flex  align-items-center justify-content-between"
-              style={{ width: "150px" }}
+              className="d-flex  align-items-center justify-content-between "
+              style={{ width: "200px" }}
             >
-              <span>To buy</span>
-              <span className="text-danger">Bought</span>
+              <span
+                className="btn btn-outline-primary"
+                onClick={() => setProStatus(null)}
+                style={proStatus == null ? borderIt() : { outline: "none" }}
+              >
+                All
+              </span>
+              <span
+                onClick={() => setProStatus("To buy")}
+                className="btn btn-outline-success"
+                style={proStatus == "To buy" ? borderIt() : { outline: "none" }}
+              >
+                To buy
+              </span>
+              <span
+                className="btn btn-outline-danger"
+                onClick={() => setProStatus("Bought")}
+                style={proStatus == "Bought" ? borderIt() : { outline: "none" }}
+              >
+                Bought
+              </span>
             </div>
             <div
               className="d-flex  align-items-center justify-content-around"
               style={{ width: "150px" }}
             >
-              <span>
+              <span
+                onClick={() => setView("grid")}
+                style={{ cursor: "pointer" }}
+              >
                 <i className="fas fa-th-large"></i> Grid
               </span>
-              <span className="text-danger">
+              <span
+                onClick={() => setView("list")}
+                style={{ cursor: "pointer" }}
+              >
                 <i className="fas fa-bars"></i> List
               </span>
             </div>
           </div>
           <div
             className=" border border-secondary  p-3 m-3  "
-            style={{ overflowY: "auto", height: "60%" }}
+            style={{ overflowY: "auto", height: "75%" }}
           >
-            <HeaderWish />
-            <hr />
+            {view == "list" && (
+              <>
+                {" "}
+                <HeaderWish /> <hr />
+              </>
+            )}
 
-            {productList ? (
+            {productList && view == "list" ? (
               productList
-                .filter((el) => el.assignedTo == activ)
+                .filter(
+                  (el) =>
+                    el.assignedTo == activ &&
+                    (proStatus ? el.status == proStatus : 1)
+                )
                 .map((el) => (
                   <>
                     <WishProduct el={el} /> <hr />
                   </>
                 ))
             ) : (
-              <h1>Loading...</h1>
+              <h1>Loading Grid...</h1>
             )}
           </div>
         </div>

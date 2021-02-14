@@ -24,8 +24,10 @@ const EditWish = ({ myWish }) => {
   //handle errors
   const wish = useSelector((state) => state.wish);
   const [ops, setOps] = useState("");
+
   useEffect(() => {
     setOps(wish.errors && wish.errors[0].msg);
+    console.log("wish", wish);
   }, [wish.errors]);
   //   handle info
   const [info, setInfo] = useState({ name: myWish && myWish.name });
@@ -66,7 +68,14 @@ const EditWish = ({ myWish }) => {
 
   return (
     <div>
-      <span onClick={openModal}>
+      <span
+        onClick={openModal}
+        onMouseOver={(e) => {
+          e.target.style.color = "#FFC312 ";
+          e.target.style.cursor = "pointer";
+        }}
+        onMouseOut={(e) => (e.target.style.color = "")}
+      >
         <i className="far fa-edit"></i> Edit
       </span>
 

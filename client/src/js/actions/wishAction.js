@@ -69,19 +69,19 @@ export const deleteWish = (id) => (dispatch) => {
 //Edit wish
 
 export const editWish = (id, info) => (dispatch) => {
-  console.log("editwish", id, info);
   axios
     .put(`/wish/${id}`, info)
     .then(() => {
+      console.log("edit success");
       dispatch(getWishList());
       dispatch({
         type: EDIT_WISH,
       });
     })
     .catch((err) => {
-      console.log(err.response);
+      console.log("edit fail");
       dispatch({
-        type: EDIT_WISH_FAIL,
+        type: ADD_WISH_FAIL,
         payload: err.response.data.errors,
       });
     });

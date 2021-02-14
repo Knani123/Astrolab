@@ -45,7 +45,14 @@ const WishProduct = ({ el }) => {
       <span className="col overflow-auto " style={{ maxHeight: "140px" }}>
         {el.descriptions}
       </span>
-      <span className="col-1 mx-3  ">{el.status}</span>
+      <span
+        className={`col-1 mx-3 btn btn-outline-${
+          el.status == "To buy" ? "success" : "danger"
+        }`}
+        style={{ height: "40px" }}
+      >
+        {el.status}
+      </span>
       <span className="col-1 mx-3  ">
         <span className="d-flex align-items-center border">
           {currencies.currency ? (
