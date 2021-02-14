@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
-
 const multer = require("multer");
+const AuthMiddleware = require("../helpers/authMidlewar");
+
 const Image = require("../models/Image");
 const Port = 8000;
+
 //setup before use multer
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -16,7 +18,7 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-router.post("/", upload.single("avatar"), (req, res) => {
+router.post("/", [AuthMiddleware, upload.single("avatar")], (req, res) => {
   let path =
     req.protocol +
     "://" +
@@ -25,7 +27,7 @@ router.post("/", upload.single("avatar"), (req, res) => {
     Port +
     "/uploads/" +
     req.file.filename;
-  const newImage = new Image({ imageName: path });
+  const newImage = new Image({ imageName: path, owner: req.userId });
   newImage
     .save()
     .then((img) => res.status(201).send(img))

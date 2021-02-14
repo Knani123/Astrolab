@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 import { getWishList } from "../js/actions/wishAction";
 import { editProduct, clearErrProd } from "../js/actions/productAction";
 import Modal from "react-modal";
@@ -16,6 +17,7 @@ const customStyles = {
 };
 
 const ModalEditProduct = ({ product }) => {
+  const fakeImage = useRef();
   const history = useHistory();
   const {
     _id,
@@ -31,6 +33,8 @@ const ModalEditProduct = ({ product }) => {
   //load wishList to map them in whislist select
   const wish = useSelector((state) => state.wish);
   const wishlist = wish.wishs;
+  //change info and file to add product
+  const [file, setFile] = useState(null);
   const [info, setInfo] = useState({
     name: "",
     descriptions: "",
@@ -75,16 +79,34 @@ const ModalEditProduct = ({ product }) => {
     history.push("/load");
   }
 
-  //dispatch Add action
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(editProduct(_id, info));
-    console.log("Hi");
-  };
+  //handle info and  Add action
   const handleChange = (e) => {
     setInfo({ ...info, [e.target.id]: e.target.value });
   };
+  //select Image
+  const selectImage = (e) => {
+    setFile(e.target.files[0]);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let formData = new FormData();
+    formData.append("avatar", file);
+    //add image
+    {
+      file
+        ? axios
+            .post("/img", formData)
+            .then((res) => {
+              console.log(res.data);
+              dispatch(
+                editProduct(_id, { ...info, image: res.data.imageName })
+              );
+            })
+            .catch((err) => console.log(err))
+        : dispatch(editProduct(_id, info));
+    }
+  };
+
   //handle errors
   const [ops, setOps] = useState([{ msg: "" }]);
   const products = useSelector((state) => state.products);
@@ -137,6 +159,26 @@ const ModalEditProduct = ({ product }) => {
           className="border border-dark d-flex flex-column p-2"
           onSubmit={handleSubmit}
         >
+          <div className="my-2">
+            <label htmlFor="avatar" className="btn btn-warning">
+              <i className="far fa-image"></i>
+            </label>
+            <input
+              id="avatar"
+              type="file"
+              name="avatar"
+              onChange={selectImage}
+              style={{ display: "none" }}
+            />
+            <label
+              htmlFor="avatar"
+              className={
+                file ? "btn btn-outline-info" : "btn btn-outline-danger m-1"
+              }
+            >
+              {file ? file.name : "load image"}
+            </label>
+          </div>
           <div className="d-flex justify-content-evenly my-2">
             <span className="d-flex flex-column">
               <label htmlFor="name">Name</label>

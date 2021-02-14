@@ -54,6 +54,7 @@ router.post(
 // get Product list by assigned
 router.get("/owner", AuthMiddleware, (req, res) => {
   Product.find({ owner: req.userId })
+    .select("-password -__v")
     .then((products) => res.send(products))
     .catch((err) => console.log(err.message));
 });

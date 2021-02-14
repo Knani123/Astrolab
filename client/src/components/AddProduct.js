@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 import { getWishList } from "../js/actions/wishAction";
 import { addProduct, clearErrProd } from "../js/actions/productAction";
 import Product from "../gallery/Product.png";
 import Alert from "./Alert";
 import "./cmp.css";
-import axios from "axios";
 const AddProduct = () => {
   const dispatch = useDispatch();
   //get errors
@@ -29,8 +29,7 @@ const AddProduct = () => {
   const [info, setInfo] = useState({
     name: "",
     descriptions: "",
-    image:
-      "https://img-0.journaldunet.com/pb5J23IF99HMY_P9HtO64G38epM=/1240x/smart/32d90de13a5f411c86709152f70fc67c/ccmcms-jdn/10861192.jpg",
+    image: "",
     status: "",
     price: "",
     currency: "",
@@ -60,11 +59,15 @@ const AddProduct = () => {
     //add image
     let formData = new FormData();
     formData.append("avatar", file);
-    axios
-      .post("/img", formData)
-      .then((res) =>
-        dispatch(addProduct({ ...info, image: res.data.imageName }))
-      );
+    {
+      file
+        ? axios
+            .post("/img", formData)
+            .then((res) =>
+              dispatch(addProduct({ ...info, image: res.data.imageName }))
+            )
+        : alert("You didn't load an image");
+    }
   };
 
   return (
@@ -79,7 +82,26 @@ const AddProduct = () => {
       >
         <div className="mx-auto my-2">
           <img src={Product} alt="add Logo" width="150px" />
-          <input type="file" name="avatar" onChange={selectImage} required />
+          <div className="my-2">
+            <label htmlFor="avatar" className="btn btn-warning">
+              <i className="far fa-image"></i>
+            </label>
+            <input
+              id="avatar"
+              type="file"
+              name="avatar"
+              onChange={selectImage}
+              style={{ display: "none" }}
+            />
+            <label
+              htmlFor="avatar"
+              className={
+                file ? "btn btn-outline-info" : "btn btn-outline-danger m-1"
+              }
+            >
+              {file ? file.name : "load image"}
+            </label>
+          </div>
         </div>
         <div className="d-flex justify-content-evenly my-2">
           <span className="d-flex flex-column">
