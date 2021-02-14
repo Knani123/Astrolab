@@ -10,6 +10,7 @@ import HeaderWish from "../components/HeaderWish";
 import ModalWish from "../components/ModalWish";
 import "./pages.css";
 import EditWish from "../components/EditWish";
+import WishProductGrid from "../components/WishProductGrid";
 const Wishs = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -79,8 +80,8 @@ const Wishs = () => {
   //handle view
   const [view, setView] = useState("list");
   return (
-    <div className="container-fluid border border-secondary ">
-      <div className="row">
+    <div className="container-fluid border border-secondary overflow-hidden ">
+      <div className="row ">
         <div
           className="col-2  border border-secondary  d-flex flex-column p-2 overflow-auto"
           style={{ padding: "0", height: "90vh" }}
@@ -126,7 +127,7 @@ const Wishs = () => {
             </div>
           </div>
 
-          <div className="d-flex align-items-center justify-content-between border border-secondary p-3  m-3">
+          <div className="d-flex align-items-center justify-content-between border border-secondary p-3  m-3 ">
             <div
               className="d-flex  align-items-center justify-content-between "
               style={{ width: "200px" }}
@@ -172,7 +173,11 @@ const Wishs = () => {
             </div>
           </div>
           <div
-            className=" border border-secondary  p-3 m-3  "
+            className={` border border-secondary ${
+              view == "list"
+                ? "border border-secondary  p-3 m-3"
+                : "row justify-content-around"
+            }`}
             style={{ overflowY: "auto", height: "75%" }}
           >
             {view == "list" && (
@@ -182,21 +187,22 @@ const Wishs = () => {
               </>
             )}
 
-            {productList && view == "list" ? (
+            {productList &&
               productList
                 .filter(
                   (el) =>
                     el.assignedTo == activ &&
                     (proStatus ? el.status == proStatus : 1)
                 )
-                .map((el) => (
-                  <>
-                    <WishProduct el={el} /> <hr />
-                  </>
-                ))
-            ) : (
-              <h1>Loading Grid...</h1>
-            )}
+                .map((el) =>
+                  view == "list" ? (
+                    <>
+                      <WishProduct el={el} /> <hr />
+                    </>
+                  ) : (
+                    <WishProductGrid el={el} />
+                  )
+                )}
           </div>
         </div>
       </div>

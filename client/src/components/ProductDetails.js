@@ -64,7 +64,7 @@ const ProductDetails = ({ product }) => {
           className="d-flex flex-column justify-content-between m-4  "
         >
           <span>
-            <h3 className="my-3">{name}</h3>
+            <h3 className="my-3 text-capitalize">{name}</h3>
             <p
               style={{ maxHeight: "150px", width: "300px" }}
               className="overflow-auto "
@@ -99,12 +99,13 @@ const ProductDetails = ({ product }) => {
         </span>
       </div>
       <p className=" m-2">
+        Wishlist:{" "}
         {wishlist &&
           product &&
           wishlist.find((el) => el._id == product.assignedTo) &&
           wishlist.find((el) => el._id == product.assignedTo).name}
       </p>
-      <p className=" m-2">{status}</p>
+      <p className=" m-2">Status: {status}</p>
     </div>
   );
 };

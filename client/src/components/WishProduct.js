@@ -26,8 +26,8 @@ const WishProduct = ({ el }) => {
   /* convert(currencies.currency, currency)  function return sable currency
    & currencySymbole set the currency symboles*/
   return (
-    <div className="row " style={{ lineHeight: " 300%" }}>
-      <span className="col-1 mx-3   text-center">
+    <div className="row align-items-center" style={{ lineHeight: " 300%" }}>
+      <span className="col-1 mx-3   text-center ">
         <a href={el.image} target="_blank">
           <img
             src={el.image}
@@ -42,7 +42,10 @@ const WishProduct = ({ el }) => {
         </a>
       </span>
       <span className="col-2  ">{el.name}</span>
-      <span className="col overflow-auto " style={{ maxHeight: "140px" }}>
+      <span
+        className="col border overflow-auto  w-75"
+        style={{ height: "100px", maxHeight: "140px" }}
+      >
         {el.descriptions}
       </span>
       <span

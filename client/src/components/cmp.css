@@ -1,18 +1,25 @@
 .select {
   padding: 5px;
   border-radius: 2px;
-  width:280px;
+  width: 280px;
 }
 
-.select1{
-    padding: 6px;
-    border-radius: 2px;
-      width:120px;
-
+.select1 {
+  padding: 6px;
+  border-radius: 2px;
+  width: 120px;
 }
 
-
-.hed span{
+.hed span {
   font-style: italic;
   font-weight: bold;
 }
+.colGrid{
+      transition:transform 1s;
+
+}
+
+.colGrid:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+  }

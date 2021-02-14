@@ -35,9 +35,9 @@ const Products = () => {
   }, [activ]);
   return (
     <div className="container-fluid border border-secondary ">
-      <div className="row">
+      <div className="row ">
         <div
-          className="col-2  border border-secondary  d-flex flex-column p-2"
+          className="col-2  border border-secondary  d-flex flex-column p-2 overflow-auto"
           style={{ padding: "0", height: "90vh" }}
         >
           <button
@@ -46,7 +46,7 @@ const Products = () => {
               setActiv("");
               dispatch(clearErrProd());
             }}
-            className="btn btn-outline-primary  d-flex justify-content-around align-items-center m-2 mx-auto p-2 w-100 "
+            className="btn btn-outline-primary  d-flex justify-content-around align-items-center m-2 mx-auto p-2 w-100  "
           >
             <i className="fas fa-plus "></i> <span>Add Product</span>
           </button>
@@ -65,7 +65,7 @@ const Products = () => {
           ))}
         </div>
         <div
-          className="col-10  border border-secondary "
+          className="col-10  border border-secondary  "
           style={{ height: "90vh" }}
         >
           {display ? (
