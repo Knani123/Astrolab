@@ -49,7 +49,6 @@ const Wishs = () => {
     const confirm = window.confirm(
       `Do you really want to delete ${myWish.name} and all its products?? `
     );
-    console.log("products", productList);
     if (confirm) {
       //delete its products
       productList
@@ -62,7 +61,6 @@ const Wishs = () => {
   }
   //handle statue
   const [proStatus, setProStatus] = useState(null);
-  console.log(proStatus);
   useEffect(() => {
     setProStatus(null);
   }, []);

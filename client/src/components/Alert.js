@@ -4,9 +4,7 @@ const Alert = ({ ops }) => {
   let T = [{ msg: "Login" }];
   if (ops != null) {
     T = ops;
-    console.log("opsss", ops);
   }
-  console.log(T);
   return (
     <div
       style={{

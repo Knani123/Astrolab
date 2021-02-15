@@ -34,7 +34,6 @@ const NavbarTop = () => {
   const [money, setMoney] = useState({ val: "", currency: "" });
   const handleClick = (e) => {
     setMoney({ val: e.target.textContent, currency: e.target.name });
-    console.log(money);
     dispatch(setCurrency(e.target.name));
     coinSound();
   };

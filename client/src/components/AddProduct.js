@@ -71,13 +71,13 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="  w-50 m-auto d-flex flex-column align-itmes-center">
+    <div className="  add m-auto d-flex flex-column align-itmes-center">
       <h3 className="text-center m-4">Add Product</h3>
       <h3 className="position-relative text-danger">
         {ops && ops[0] && ops[0].msg}
       </h3>
       <form
-        className="border border-dark d-flex flex-column"
+        className="form-add border border-dark d-flex flex-column m-auto"
         onSubmit={handleSubmit}
       >
         <div className="mx-auto my-2">
@@ -135,14 +135,14 @@ const AddProduct = () => {
               value={info.currency}
               onChange={handleChange}
             >
-              <option value="">-- Currency --</option>
+              <option value="">Currency</option>
               <option value="USD">Dollar</option>
               <option value="EUR">Euro</option>
               <option value="TND">Dinar</option>
             </select>
           </span>
         </div>
-        <span className="d-flex flex-column px-4 pb-2">
+        <span className="d-flex flex-column px-4 pb-2 ">
           <label htmlFor="descriptions">Description</label>
           <textarea
             value={info.descriptions}
@@ -152,7 +152,7 @@ const AddProduct = () => {
             id="descriptions"
             cols="30"
             rows="3"
-            className="from-control"
+            className="from-control border"
           ></textarea>
         </span>
         <div className="d-flex justify-content-evenly">

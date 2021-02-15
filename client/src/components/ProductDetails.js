@@ -35,7 +35,6 @@ const ProductDetails = ({ product }) => {
   useEffect(() => {
     // moneymoney();
   }, [currencies.currency]);
-  console.log("typeof coeff", coeff == NaN, typeof coeff);
   /* convert(currencies.currency, currency)  function return sable currency
    & currencySymbole set the currency symboles*/
 

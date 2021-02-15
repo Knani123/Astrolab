@@ -28,7 +28,6 @@ const EditWish = ({ myWish }) => {
 
   useEffect(() => {
     setOps(wish.errors && wish.errors[0].msg);
-    console.log("wish", wish);
   }, [wish.errors]);
   //   handle info
   const [info, setInfo] = useState({ name: myWish && myWish.name });

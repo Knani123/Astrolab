@@ -1,13 +1,13 @@
 .select {
   padding: 5px;
   border-radius: 2px;
-  width: 280px;
+  max-width: 280px; 
 }
 
 .select1 {
   padding: 6px;
   border-radius: 2px;
-  width: 120px;
+  max-width: 120px; 
 }
 
 .hed span {
@@ -19,14 +19,43 @@
 
 }
 
-.colGrid:hover {
-    /* cursor: pointer; */
-    /* transform: scale(1.01); */
-  }
+.add{
+  width: 50%;
+}
 
   
   @media screen and (max-width: 860px) {
 .prodduct-details{
   visibility: hidden
+}
+.head-edit{
+  
+  padding: 5px;
+  margin-left: 5px;
+}
+.select{
+
+  max-width: 200px;
+}
+
+.select1 {
+
+  width: 100px;
+}
+.form-edit{
+  padding: 15px;
+}
+.add{
+  width: 100%;
+}
+.price{
+  width: 80px;
+}
+.name{
+  width: 180px;
+}
+.form-add{
+  padding: 5px;
+  width: 345px;
 }
     }

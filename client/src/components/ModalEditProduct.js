@@ -138,8 +138,8 @@ const ModalEditProduct = ({ product }) => {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <div className="d-flex align-items-center justify-content-between align-items-center  mb-3  ">
-          <h4>Edit Product</h4>
+        <div className="head-edit d-flex align-items-center justify-content-between align-items-center  mb-3  ">
+          <h4 className="h4">Edit Product</h4>
           <p className=" text-danger">{ops && ops[0] && ops[0].msg}</p>
           <i
             className="fas fa-times "
@@ -156,7 +156,7 @@ const ModalEditProduct = ({ product }) => {
           ></i>
         </div>
         <form
-          className="border border-dark d-flex flex-column p-2"
+          className="form-edit border border-dark d-flex flex-column p-2"
           onSubmit={handleSubmit}
         >
           <div className="my-2">

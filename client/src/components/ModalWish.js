@@ -19,7 +19,6 @@ const ModalWish = ({ prodList, translateAdd }) => {
   // prodList.current.style.transform = "translateX(-100%)";
   //handle errors
   const wish = useSelector((state) => state.wish);
-  console.log(wish);
   const [ops, setOps] = useState("");
   useEffect(() => {
     setOps(wish.errors && wish.errors[0].msg);

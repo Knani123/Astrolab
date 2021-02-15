@@ -59,7 +59,6 @@ router.delete("/:id", AuthMiddleware, (req, res) => {
 
 //Edit Product
 router.put("/:id", AuthMiddleware, (req, res) => {
-  console.log(req.body.name);
   Wish.find({ name: req.body.name }).then((wish) => {
     if (wish.length && wish[0]._id != req.params.id) {
       return res.status(400).send({

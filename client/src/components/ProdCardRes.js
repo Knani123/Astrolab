@@ -7,7 +7,6 @@ import { convert, currencySymbole } from "../currency";
 import "./cmp.css";
 
 const ProdCardRes = ({ product }) => {
-  console.log(product);
   const { _id, name, descriptions, image, status, price, currency } = product;
   //load wishList
   const wish = useSelector((state) => state.wish);
@@ -36,7 +35,6 @@ const ProdCardRes = ({ product }) => {
   useEffect(() => {
     // moneymoney();
   }, [currencies.currency]);
-  console.log("typeof coeff", coeff == NaN, typeof coeff);
   /* convert(currencies.currency, currency)  function return sable currency
    & currencySymbole set the currency symboles*/
 
@@ -59,14 +57,11 @@ const ProdCardRes = ({ product }) => {
           <i className="far fa-trash-alt "></i> Delete
         </span>
       </div>
-      <div class="card">
-        <img class="card-img-top" src={image} alt="Card image cap" />
+      <div class="card shadow">
+        <img class="card-img-top border" src={image} alt="Card image cap" />
         <div class="card-body">
-          <h5 class="card-title">{name}</h5>
-          <p class="card-text">{descriptions}</p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">
+          <h5 class="card-title text-center">{name}</h5>
+          <div class="card-text d-flex justify-content-between">
             <span className="d-flex align-items-center border">
               <span> Price: </span>
               {currencies.currency ? (
@@ -85,6 +80,32 @@ const ProdCardRes = ({ product }) => {
                 </span>
               )}
             </span>
+            <span className="m-2">
+              Status:{" "}
+              <span
+                className={` text-${status == "To buy" ? "success" : "danger"}`}
+                style={{ fontSize: "16px", fontWeight: "bold" }}
+              >
+                {status}
+              </span>
+            </span>
+          </div>
+          <p class="card-text">{descriptions}</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">
+            <p className=" m-2 d-flex justify-content-end align-items-center">
+              Wishlist:{" "}
+              <span
+                className="text-info mx-2"
+                style={{ fontSize: "16px", fontWeight: "bold" }}
+              >
+                {wishlist &&
+                  product &&
+                  wishlist.find((el) => el._id == product.assignedTo) &&
+                  wishlist.find((el) => el._id == product.assignedTo).name}
+              </span>
+            </p>
           </small>
         </div>
       </div>
