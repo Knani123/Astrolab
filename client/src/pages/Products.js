@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getMyProducts, clearErrProd } from "../js/actions/productAction";
 import AddProduct from "../components/AddProduct";
 import ProductDetails from "../components/ProductDetails";
+import ProdCardRes from "../components/ProdCardRes";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -33,13 +34,42 @@ const Products = () => {
   useEffect(() => {
     setMyProduct(productList.filter((el) => el._id == activ)[0]);
   }, [activ]);
+  //responsive btn
+  const [show, setShow] = useState(true);
+  const prodList = useRef();
+  const handleshow = () => {
+    prodList.current.style.transform = show
+      ? "translateX(-100%)"
+      : "translateX(0%)";
+    setShow(!show);
+    prodList.current.style.transition = "0.4s";
+  };
+
+  const translateAdd = () => {
+    let body = document.getElementsByTagName("body")[0];
+    let widthBody = parseInt(
+      window.getComputedStyle(body).getPropertyValue("width")
+    );
+    if (widthBody < 860) {
+      prodList.current.style.transform = "translateX(-100%)";
+      setShow(false);
+    }
+  };
   return (
     <div className="container-fluid border border-secondary ">
       <div className="row ">
         <div
-          className="col-2  border border-secondary  d-flex flex-column p-2 overflow-auto"
-          style={{ padding: "0", height: "90vh" }}
+          className="product-add col-2  border border-secondary  d-flex flex-column p-2"
+          ref={prodList}
         >
+          <button
+            className={`btn btn-${
+              show ? "danger" : "success"
+            } rounded-circle btn-show`}
+            onClick={handleshow}
+          >
+            <i className="fas fa-arrows-alt-h"></i>
+          </button>
           <button
             onClick={() => {
               setDisplay(false);
@@ -65,17 +95,22 @@ const Products = () => {
           ))}
         </div>
         <div
-          className="col-10  border border-secondary  "
-          style={{ height: "90vh" }}
+          className="product-info col-10  border border-secondary "
+          onClick={translateAdd}
         >
           {display ? (
             <>
               {myProduct ? (
-                <ProductDetails product={myProduct} />
+                <>
+                  {" "}
+                  {window.innerWidth > 860 ? (
+                    <ProductDetails product={myProduct} />
+                  ) : (
+                    <ProdCardRes product={myProduct} />
+                  )}
+                </>
               ) : (
-                <h2 className="alert alert-danger text-center w-75 mt-3 mx-auto">
-                  You have no product or bad connection
-                </h2>
+                <h1>Wait...</h1>
               )}
             </>
           ) : (

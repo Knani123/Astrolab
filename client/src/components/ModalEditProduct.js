@@ -119,7 +119,7 @@ const ModalEditProduct = ({ product }) => {
 
   //get product list
   return (
-    <div>
+    <div className="m-2">
       <span
         onClick={openModal}
         onMouseOver={(e) => {

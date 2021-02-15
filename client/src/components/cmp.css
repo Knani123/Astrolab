@@ -23,3 +23,10 @@
     /* cursor: pointer; */
     /* transform: scale(1.01); */
   }
+
+  
+  @media screen and (max-width: 860px) {
+.prodduct-details{
+  visibility: hidden
+}
+    }

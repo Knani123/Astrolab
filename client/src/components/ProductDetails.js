@@ -4,12 +4,10 @@ import { getWishList } from "../js/actions/wishAction";
 import { deleteproduct } from "../js/actions/productAction";
 import ModalEditProduct from "./ModalEditProduct";
 import { convert, currencySymbole } from "../currency";
-// import EditProduct from "./EditProduct";
-
+import "./cmp.css";
 const ProductDetails = ({ product }) => {
   //destruction product
   const { _id, name, descriptions, image, status, price, currency } = product;
-  console.log("image", image);
   //load wishList
   const wish = useSelector((state) => state.wish);
   const wishlist = wish.wishs;
@@ -49,13 +47,13 @@ const ProductDetails = ({ product }) => {
     }
   }
   return (
-    <div className="mt-5  mx-3 ">
-      <div className="d-flex m-2 ">
+    <div className="prodduct-details mt-5  mx-3 ">
+      <div className="d-flex m-4 ">
         <img
           src={image}
           alt=""
           width="50%"
-          style={{ height: "200px" }}
+          style={{ height: "300px" }}
           className=" mt-5 border shadow"
         />
         <div
@@ -100,12 +98,25 @@ const ProductDetails = ({ product }) => {
       </div>
       <p className=" m-2">
         Wishlist:{" "}
-        {wishlist &&
-          product &&
-          wishlist.find((el) => el._id == product.assignedTo) &&
-          wishlist.find((el) => el._id == product.assignedTo).name}
+        <span
+          className="text-info"
+          style={{ fontSize: "16px", fontWeight: "bold" }}
+        >
+          {wishlist &&
+            product &&
+            wishlist.find((el) => el._id == product.assignedTo) &&
+            wishlist.find((el) => el._id == product.assignedTo).name}
+        </span>
       </p>
-      <p className=" m-2">Status: {status}</p>
+      <p className="m-2">
+        Status:{" "}
+        <span
+          className={` text-${status == "To buy" ? "success" : "danger"}`}
+          style={{ fontSize: "16px", fontWeight: "bold" }}
+        >
+          {status}
+        </span>
+      </p>
     </div>
   );
 };
