@@ -82,12 +82,26 @@ const Wishs = () => {
     setShow(!show);
     prodList.current.style.transition = "0.4s";
   };
+  const translateAdd = () => {
+    let body = document.getElementsByTagName("body")[0];
+    let widthBody = parseInt(
+      window.getComputedStyle(body).getPropertyValue("width")
+    );
+    console.log(widthBody);
+    if (widthBody < 860) {
+      prodList.current.style.transform = "translateX(-100%)";
+      setShow(false);
+    }
+  };
+
+  //handle responsive nav add
+
   return (
     <div className="container-fluid border border-secondary overflow-hidden ">
       <div className="row ">
         <div
           ref={prodList}
-          className="wish-add  col-2  border border-secondary  d-flex flex-column p-2 "
+          className="wish-add  col-2  border border-secondary  d-flex flex-column  "
         >
           <button
             className={`btn btn-${
@@ -97,7 +111,7 @@ const Wishs = () => {
           >
             <i className="fas fa-arrows-alt-h"></i>
           </button>
-          <ModalWish />
+          <ModalWish prodList={prodList} translateAdd={translateAdd} />
           {wishlist.map((el) => (
             <Link
               to="#"
@@ -109,7 +123,10 @@ const Wishs = () => {
             </Link>
           ))}
         </div>
-        <div className="wish-products col-10  border border-secondary ">
+        <div
+          className="wish-products col-10  border border-secondary "
+          onClick={translateAdd}
+        >
           <div className="d-flex align-items-center justify-content-between  p-1 m-3">
             <h4>{myWish && myWish.name}</h4>
             <div

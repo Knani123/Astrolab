@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearErrwish } from "../js/actions/wishAction";
 import Modal from "react-modal";
 import { addWish } from "../js/actions/wishAction";
+import "./cmp.css";
 const customStyles = {
   content: {
     top: "50%",
@@ -14,9 +15,11 @@ const customStyles = {
   },
 };
 
-const ModalWish = () => {
+const ModalWish = ({ prodList, translateAdd }) => {
+  // prodList.current.style.transform = "translateX(-100%)";
   //handle errors
   const wish = useSelector((state) => state.wish);
+  console.log(wish);
   const [ops, setOps] = useState("");
   useEffect(() => {
     setOps(wish.errors && wish.errors[0].msg);
@@ -28,11 +31,16 @@ const ModalWish = () => {
 
   function openModal() {
     setIsOpen(true);
+    //translate add wishlist
+    translateAdd();
+
     dispatch(clearErrwish());
   }
 
   function closeModal() {
     setIsOpen(false);
+    prodList.current.style.transform = "translateX(0%)";
+
     dispatch(clearErrwish());
   }
   const clearInfo = () => {
@@ -42,6 +50,9 @@ const ModalWish = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (wish.wishs.length >= 10) {
+      return alert("You only can have less than 10 lists");
+    }
     dispatch(addWish(info));
   };
   const handleChange = (e) => {
@@ -62,8 +73,8 @@ const ModalWish = () => {
         contentLabel="Example Modal"
       >
         <div
-          className="d-flex align-items-center justify-content-between  mb-3"
-          style={{ width: "400px" }}
+          className="name-wishlist d-flex align-items-center justify-content-between  mb-3"
+          // style={{ width: "400px" }}
         >
           <h4>Add wishList</h4>
           <i
@@ -76,7 +87,7 @@ const ModalWish = () => {
           onSubmit={handleSubmit}
           className="d-flex flex-column form-group "
         >
-          <div className="px-5 mb-5">
+          <div className="px-5 mb-3">
             <label htmlFor="name" className="text-secondary">
               Name
             </label>
