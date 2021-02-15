@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -20,13 +20,6 @@ const Wishs = () => {
   useEffect(() => {
     dispatch(getWishList());
   }, []);
-  // create first wish
-  // useEffect(() => {
-  //   if (!wish.wishs.length) {
-  //     dispatch(addWish({ name: "First1 Wishlist" }));
-  //   }
-  // }, []);
-  //active wishLink
   const [activ, setActiv] = useState("");
   const activIt = (id) => {
     if (id == activ) {
@@ -44,7 +37,6 @@ const Wishs = () => {
   }, [activ]);
 
   // load userProduct
-  // load product from dtBase and store
   useEffect(() => {
     dispatch(getMyProducts());
   }, []);
@@ -79,13 +71,32 @@ const Wishs = () => {
   };
   //handle view
   const [view, setView] = useState("list");
+
+  //responsive btn
+  const [show, setShow] = useState(true);
+  const prodList = useRef();
+  const handleshow = () => {
+    prodList.current.style.transform = show
+      ? "translateX(-100%)"
+      : "translateX(0%)";
+    setShow(!show);
+    prodList.current.style.transition = "0.4s";
+  };
   return (
     <div className="container-fluid border border-secondary overflow-hidden ">
       <div className="row ">
         <div
-          className="col-2  border border-secondary  d-flex flex-column p-2 overflow-auto"
-          style={{ padding: "0", height: "90vh" }}
+          ref={prodList}
+          className="wish-add  col-2  border border-secondary  d-flex flex-column p-2 "
         >
+          <button
+            className={`btn btn-${
+              show ? "danger" : "success"
+            } rounded-circle btn-show`}
+            onClick={handleshow}
+          >
+            <i className="fas fa-arrows-alt-h"></i>
+          </button>
           <ModalWish />
           {wishlist.map((el) => (
             <Link
@@ -98,10 +109,7 @@ const Wishs = () => {
             </Link>
           ))}
         </div>
-        <div
-          className="col-10  border border-secondary "
-          style={{ height: "90vh" }}
-        >
+        <div className="wish-products col-10  border border-secondary ">
           <div className="d-flex align-items-center justify-content-between  p-1 m-3">
             <h4>{myWish && myWish.name}</h4>
             <div

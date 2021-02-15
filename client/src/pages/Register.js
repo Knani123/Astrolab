@@ -35,15 +35,11 @@ const Register = () => {
     auth.isAuth && history.push("/");
   }, [auth]);
   return (
-    <div
-      className="d-flex flex-column justify-content-center align-items-center  vh-100 "
-      style={{ backgroundColor: "#c0c2c5" }}
-    >
+    <div className="d-flex flex-column justify-content-center align-items-center  vh-100 register">
       <h1>Register Page</h1>
       <form
         onSubmit={handleSubmit}
-        style={{ width: "400px" }}
-        className="d-flex flex-column shadow form-group px-5 pt-5  border border-success alert-light rounded position-relative"
+        className="d-flex flex-column shadow form-group p-4 pb-2  border border-success alert-light rounded position-relative"
       >
         <h5 className="position-relative text-danger">
           {ops && ops[0] && ops[0].msg}

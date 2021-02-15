@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import Alert from "../components/Alert";
 import { loginUser, clearErr } from "../js/actions/authAction";
+import "./pages.css";
 const Login = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
@@ -29,15 +30,12 @@ const Login = () => {
     auth.isAuth && history.push("/");
   }, [auth]);
   return (
-    <div
-      className="d-flex flex-column justify-content-center align-items-center  vh-100  "
-      style={{ backgroundColor: "#c0c2c5" }}
-    >
+    <div className="d-flex flex-column justify-content-center align-items-center  vh-100  login">
       <h1>Login Page</h1>
       <form
         onSubmit={handleSubmit}
-        className="d-flex flex-column shadow form-group p-5 m-5 border border-success alert-light rounded position-relative"
-        style={{ width: "400px" }}
+        className="d-flex flex-column shadow form-group p-4 m-4 border border-success alert-light rounded position-relative from-login "
+        // style={{ width: "350px" }}
       >
         <h5 className="position-relative text-danger">{ops && ops[0].msg}</h5>
 

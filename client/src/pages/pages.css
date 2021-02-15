@@ -1,6 +1,83 @@
+body{
+  padding: 0;
+  margin: 0;
+}
 .activLink {
-    text-decoration: none;
-     color:black;
-    padding: 10px;
+  text-decoration: none;
+  color: black;
+  padding: 10px;
 }
 
+.register,
+.login,
+.profile {
+  background-color: #c0c2c5;
+}
+.btn-show {
+  z-index: 100 !important;
+}
+
+
+
+@media (min-width: 412px) {
+  .home {
+    width: 400px;
+  }
+}
+
+@media (max-width: 411px) {
+  .home {
+    width: 350px;
+  }
+}
+
+.wish-add {
+
+  padding: 0px;
+  height: 90vh;
+  transition: 0, 4s transform;
+  /* overflow-Y:auto */
+
+}
+
+.btn-show {
+
+  width: 50px;
+  border-radius: 50%;
+  height: 50px;
+  position: relative;
+  left: 90%;
+  top: 40%;
+  z-index: 100 !important;
+  visibility: hidden;
+
+}
+
+.wish-products {
+  height: 90vh;
+}
+
+@media screen and (max-width: 800px) {
+  .wish-add {
+    position: absolute;
+    left: 0;
+    transition: 0, 4s;
+    background-color: white;
+    box-shadow: 5px 5px 5px black;
+    width: 200px !important;
+    /* overflow-y: auto !important; 
+     overflow-x: visible !important; */
+    z-index: 10;
+   }
+
+  .btn-show {
+    visibility: visible !important;
+    z-index: 100;
+  }
+
+  .wish-products {
+    width: 100% !important;
+
+  }
+
+}

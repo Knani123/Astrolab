@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { loadUser } from "../js/actions/authAction";
 import Alert from "../components/Alert";
-
+import "./pages.css";
 const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -26,8 +26,8 @@ const Home = () => {
       <h1>Home Page </h1>
       {showAlert && <Alert ops={[{ msg: "You must login or regiter" }]} />}
       <div
-        className="d-flex flex-column shadow form-group p-5 m-5 border border-success alert-light rounded "
-        style={{ width: "400px" }}
+        className="d-flex flex-column shadow form-group p-5 m-5 border border-success alert-light rounded home"
+        // style={{ width: "400px" }}
       >
         <Link to={auth.isAuth && `/profile`} onClick={alertMSG}>
           <btn className="btn btn-success m-2 w-100">

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { loadUser } from "../js/actions/authAction";
 import { getMyProducts } from "../js/actions/productAction";
 import { getWishList } from "../js/actions/wishAction";
-
+import "./pages.css";
 const Profile = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
@@ -37,17 +36,11 @@ const Profile = () => {
   }, []);
 
   return (
-    <div
-      className="d-flex flex-column  align-items-center  vh-100  "
-      style={{ backgroundColor: "#c0c2c5" }}
-    >
+    <div className="d-flex flex-column  align-items-center  vh-100  profile">
       <h3 className="alert alert-success mt-3 text-capitalize text-canter border border-dark shadow-lg">
         Welcome {user.fname} {user.lname}
       </h3>
-      <div
-        className="d-flex flex-column shadow form-group py-3 px-5 mx-3 border border-success alert-light rounded "
-        style={{ width: "400px" }}
-      >
+      <div className="d-flex flex-column shadow form-group py-3 px-5 mx-3 border border-success alert-light rounded ">
         <h5 className="text-dark">About</h5>
         <table className="table ">
           <tr>

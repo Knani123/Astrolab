@@ -11,12 +11,13 @@ const NavbarTop = () => {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   // alert login or register
-  const [showAlert, setShowAlert] = useState(false);
+  // const [showAlert, setShowAlert] = useState(false);
   const alertMSG = () => {
-    !auth.isAuth && setShowAlert(true);
-    setTimeout(() => {
-      setShowAlert(false);
-    }, 2000);
+    !auth.isAuth && alert("You must login or register before");
+    // !auth.isAuth && setShowAlert(true);
+    // setTimeout(() => {
+    //   setShowAlert(false);
+    // }, 2000);
   };
   //get User
   const [user, setUser] = useState({
@@ -66,12 +67,12 @@ const NavbarTop = () => {
         id="audio"
         ref={sound}
       ></audio>
-      <div
+      {/* <div
         className="w-100 position-absolute"
         style={{ top: "0", left: "35%" }}
       >
-        {showAlert && <Alert ops={[{ msg: "You must login or regiter" }]} />}
-      </div>
+        {showAlert && <Alert ops={[{ msg: "You must login or register" }]} />}
+      </div> */}
       <nav
         className="navbar navbar-expand-lg navbar-light bg-light px-2"
         style={{ paddingBottom: "0" }}
