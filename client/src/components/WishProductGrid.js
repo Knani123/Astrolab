@@ -29,13 +29,13 @@ const WishProductGrid = ({ el }) => {
     <div className="col colGrid">
       <div
         className="card shadow mx-auto my-2"
-        style={{ width: "11rem", height: "400px" }}
+        style={{ width: "15rem", height: "400px" }}
       >
         <img
           className="card-img-top"
           src={el.image}
           alt="Card image cap"
-          style={{ height: "200px" }}
+          style={{ height: "180px" }}
         />
         <div className="card-body position-relative">
           <h6 className="card-title">{el.name}</h6>

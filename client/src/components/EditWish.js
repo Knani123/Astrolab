@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { clearErrwish } from "../js/actions/wishAction";
 import { addWish, editWish } from "../js/actions/wishAction";
 import Modal from "react-modal";
+import "./cmp.css";
 
 const customStyles = {
   content: {
@@ -86,8 +87,8 @@ const EditWish = ({ myWish }) => {
         contentLabel="Example Modal"
       >
         <div
-          className="d-flex align-items-center justify-content-between  mb-3"
-          style={{ width: "400px" }}
+          className="name-wishlist d-flex align-items-center justify-content-between  mb-3"
+          // style={{ width: "400px" }}
         >
           <h4>Edit wishList</h4>
           <i

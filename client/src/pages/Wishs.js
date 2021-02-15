@@ -70,8 +70,15 @@ const Wishs = () => {
     return { outline: "5px solid yellow" };
   };
   //handle view
-  const [view, setView] = useState("list");
-
+  const [view, setView] = useState("Grid");
+  //function to get widthScreen
+  const widthScreen = () => {
+    let body = document.getElementsByTagName("body")[0];
+    let widthBody = parseInt(
+      window.getComputedStyle(body).getPropertyValue("width")
+    );
+    return widthBody;
+  };
   //responsive btn
   const [show, setShow] = useState(true);
   const prodList = useRef();
@@ -82,20 +89,14 @@ const Wishs = () => {
     setShow(!show);
     prodList.current.style.transition = "0.4s";
   };
+
   const translateAdd = () => {
-    let body = document.getElementsByTagName("body")[0];
-    let widthBody = parseInt(
-      window.getComputedStyle(body).getPropertyValue("width")
-    );
-    console.log(widthBody);
+    let widthBody = widthScreen();
     if (widthBody < 860) {
       prodList.current.style.transform = "translateX(-100%)";
       setShow(false);
     }
   };
-
-  //handle responsive nav add
-
   return (
     <div className="container-fluid border border-secondary overflow-hidden ">
       <div className="row ">
@@ -127,7 +128,7 @@ const Wishs = () => {
           className="wish-products col-10  border border-secondary "
           onClick={translateAdd}
         >
-          <div className="d-flex align-items-center justify-content-between  p-1 m-3">
+          <div className="top-header d-flex align-items-center justify-content-between  p-1 mx-3 mt-2">
             <h4>{myWish && myWish.name}</h4>
             <div
               className="d-flex  align-items-center justify-content-around"
@@ -152,11 +153,8 @@ const Wishs = () => {
             </div>
           </div>
 
-          <div className="d-flex align-items-center justify-content-between border border-secondary p-3  m-3 ">
-            <div
-              className="d-flex  align-items-center justify-content-between "
-              style={{ width: "200px" }}
-            >
+          <div className="header d-flex align-items-center justify-content-between border border-secondary w-100 ">
+            <div className=" status-btn d-flex   ">
               <span
                 className="btn btn-outline-primary"
                 onClick={() => setProStatus(null)}
@@ -179,10 +177,7 @@ const Wishs = () => {
                 Bought
               </span>
             </div>
-            <div
-              className="d-flex  align-items-center justify-content-around"
-              style={{ width: "150px" }}
-            >
+            <div className="list-grid d-flex  align-items-center justify-content-around">
               <span
                 onClick={() => setView("grid")}
                 style={{ cursor: "pointer" }}
@@ -205,7 +200,7 @@ const Wishs = () => {
             }`}
             style={{ overflowY: "auto", height: "75%" }}
           >
-            {view == "list" && (
+            {view == "list" && window.innerWidth > 860 && (
               <>
                 {" "}
                 <HeaderWish /> <hr />

@@ -23,7 +23,7 @@ router.post(
             return res.status(400).send({
               errors: [
                 {
-                  msg: "Name already used",
+                  msg: "Name already used,. Please try another",
                 },
               ],
             });

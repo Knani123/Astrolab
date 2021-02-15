@@ -20,6 +20,6 @@
 }
 
 .colGrid:hover {
-    cursor: pointer;
-    transform: scale(1.02);
+    /* cursor: pointer; */
+    /* transform: scale(1.01); */
   }

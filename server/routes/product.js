@@ -71,6 +71,8 @@ router.put("/:id", AuthMiddleware, (req, res) => {
   console.log(req.body.name);
   Product.find({ name: req.body.name }).then((product) => {
     if (product.length && product[0]._id != req.params.id) {
+      console.log(product.length && product[0]._id != req.params.id);
+      console.log(req.params.id);
       return res.status(400).send({
         errors: [
           {

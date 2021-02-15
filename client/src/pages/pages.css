@@ -1,4 +1,4 @@
-body{
+body {
   padding: 0;
   margin: 0;
 }
@@ -17,8 +17,6 @@ body{
   z-index: 100 !important;
 }
 
-
-
 @media (min-width: 412px) {
   .home {
     width: 400px;
@@ -32,15 +30,12 @@ body{
 }
 
 .wish-add {
-
   padding: 0px;
   height: 90vh;
   transition: 0.4s transform;
-
 }
 
 .btn-show {
-
   width: 50px;
   border-radius: 50%;
   height: 50px;
@@ -49,16 +44,31 @@ body{
   top: 40%;
   z-index: 100 !important;
   visibility: hidden;
-
 }
-.name-wishlist{
+.name-wishlist {
   width: 400px;
 }
 
 .wish-products {
   height: 90vh;
 }
-
+  .top-header {
+    font-size: 15px;
+    margin: 0px !important;
+    padding: 0px !important;
+        margin: 15px;
+        padding: 15px;
+  }
+  .header {
+    margin: 10px ;
+    padding: 10px;
+  }
+.status-btn {
+  width: 200px;
+}
+.list-grid {
+  width: 150px;
+}
 @media screen and (max-width: 860px) {
   .wish-add {
     position: absolute;
@@ -69,10 +79,9 @@ body{
     width: 200px !important;
     /* overflow-y: auto !important; 
      overflow-x: visible !important; */
-         height: 100% !important;
-
+    height: 100% !important;
     z-index: 10;
-   }
+  }
 
   .btn-show {
     visibility: visible !important;
@@ -80,10 +89,30 @@ body{
   }
   .wish-products {
     width: 100% !important;
-
   }
   .name-wishlist {
     width: 320px;
+  }
+    .top-header {
+      font-size: 15px;
+      margin: 0px !important;
+      padding: 0px !important;
+    }
+  .header {
+    width: 100%;
+    margin: 0px !important;
+    padding: 0px !important;
+  }
+  .list-grid {
+    visibility: hidden;
+    display: none;
+  }
+  .status-btn {
+    width: 200%;
+    justify-content: flex-end;
+  }
+  .status-btn span {
+    font-size: 12px;
   }
 
 }
