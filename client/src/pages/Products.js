@@ -5,7 +5,7 @@ import { getMyProducts, clearErrProd } from "../js/actions/productAction";
 import AddProduct from "../components/AddProduct";
 import ProductDetails from "../components/ProductDetails";
 import ProdCardRes from "../components/ProdCardRes";
-
+import defaultImage from "../gallery/defaultImage.jpg";
 const Products = () => {
   const dispatch = useDispatch();
   // load product from dtBase and store
@@ -30,7 +30,15 @@ const Products = () => {
   useEffect(() => {
     productList && productList[0] && setActiv(productList[0]._id);
   }, [productList[0]]);
-  const [myProduct, setMyProduct] = useState({ name: "" });
+  const [myProduct, setMyProduct] = useState({
+    name: "",
+    descriptions: "",
+    image: { defaultImage },
+    status: "",
+    price: "",
+    currency: "",
+    assignedTo: "",
+  });
   useEffect(() => {
     setMyProduct(productList.filter((el) => el._id == activ)[0]);
   }, [activ]);

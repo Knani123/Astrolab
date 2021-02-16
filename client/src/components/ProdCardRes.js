@@ -58,11 +58,21 @@ const ProdCardRes = ({ product }) => {
         </span>
       </div>
       <div cla="card shadow">
-        <img cla="card-img-top border" src={image} alt="Card image cap" />
+        <img
+          cla="card-img-top border m-auto"
+          src={image}
+          alt="Card image cap"
+          style={{ textAlign: "center", width: "80%" }}
+        />
         <div cla="card-body">
-          <h5 cla="card-title text-center">{name}</h5>
+          <h5
+            cla="card-title text-center border"
+            style={{ textAlign: "center" }}
+          >
+            {name}
+          </h5>
           <div cla="card-text d-flex justify-content-between">
-            <span className="d-flex align-items-center border">
+            <span className="d-flex align-items-center ">
               <span> Price: </span>
               {currencies.currency ? (
                 <span style={{ fontWeight: "bold" }}>
@@ -80,7 +90,7 @@ const ProdCardRes = ({ product }) => {
                 </span>
               )}
             </span>
-            <span className="m-2">
+            <span className="">
               Status:{" "}
               <span
                 className={` text-${status == "To buy" ? "success" : "danger"}`}
@@ -90,7 +100,16 @@ const ProdCardRes = ({ product }) => {
               </span>
             </span>
           </div>
-          <p cla="card-text">{descriptions}</p>
+          <p
+            cla="card-text  "
+            style={{
+              border: "1px solid black",
+              margin: "10px",
+              padding: "8px",
+            }}
+          >
+            {descriptions}
+          </p>
         </div>
         <div cla="card-footer">
           <small cla="text-muted">
