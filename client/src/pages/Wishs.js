@@ -111,8 +111,9 @@ const Wishs = () => {
             <i className="fas fa-arrows-alt-h"></i>
           </button>
           <ModalWish prodList={prodList} translateAdd={translateAdd} />
-          {wishlist.map((el) => (
+          {wishlist.map((el, i) => (
             <Link
+              key={i}
               to="#"
               className={`activLink ${activIt(el._id)}`}
               style={{ width: "100%" }}
@@ -212,13 +213,13 @@ const Wishs = () => {
                     el.assignedTo == activ &&
                     (proStatus ? el.status == proStatus : 1)
                 )
-                .map((el) =>
+                .map((el, i) =>
                   view == "list" ? (
                     <>
-                      <WishProduct el={el} /> <hr />
+                      <WishProduct el={el} key={i} /> <hr />
                     </>
                   ) : (
-                    <WishProductGrid el={el} />
+                    <WishProductGrid el={el} key={i} />
                   )
                 )}
           </div>

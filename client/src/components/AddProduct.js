@@ -4,7 +4,6 @@ import axios from "axios";
 import { getWishList } from "../js/actions/wishAction";
 import { addProduct, clearErrProd } from "../js/actions/productAction";
 import Product from "../gallery/Product.png";
-import Alert from "./Alert";
 import "./cmp.css";
 const AddProduct = () => {
   const dispatch = useDispatch();
@@ -167,7 +166,11 @@ const AddProduct = () => {
             >
               <option value="">-- Choise WishList --</option>
               {wishlist &&
-                wishlist.map((el) => <option value={el._id}>{el.name}</option>)}
+                wishlist.map((el, i) => (
+                  <option key={i} value={el._id}>
+                    {el.name}
+                  </option>
+                ))}
             </select>
           </div>
           <div className="d-flex flex-column ">

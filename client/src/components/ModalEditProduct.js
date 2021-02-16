@@ -244,8 +244,10 @@ const ModalEditProduct = ({ product }) => {
               >
                 <option value="">-- Choise WishList --</option>
                 {wishlist &&
-                  wishlist.map((el) => (
-                    <option value={el._id}>{el.name}</option>
+                  wishlist.map((el, i) => (
+                    <option key={i} value={el._id}>
+                      {el.name}
+                    </option>
                   ))}
               </select>
             </div>

@@ -80,8 +80,9 @@ const Products = () => {
           >
             <i className="fas fa-plus "></i> <span>Add Product</span>
           </button>
-          {productList.map((el) => (
+          {productList.map((el, i) => (
             <Link
+              key={i}
               to="#"
               className={`activLink ${activIt(el._id)}`}
               style={{ width: "100%" }}

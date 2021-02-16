@@ -15,8 +15,8 @@ const Alert = ({ ops }) => {
       }}
       className="alert alert-danger p-2"
     >
-      {T.map((el) => (
-        <h1>{el.msg}</h1>
+      {T.map((el, i) => (
+        <h1 key={i}>{el.msg}</h1>
       ))}
     </div>
   );

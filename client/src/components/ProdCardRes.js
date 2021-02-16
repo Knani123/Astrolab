@@ -57,11 +57,11 @@ const ProdCardRes = ({ product }) => {
           <i className="far fa-trash-alt "></i> Delete
         </span>
       </div>
-      <div class="card shadow">
-        <img class="card-img-top border" src={image} alt="Card image cap" />
-        <div class="card-body">
-          <h5 class="card-title text-center">{name}</h5>
-          <div class="card-text d-flex justify-content-between">
+      <div cla="card shadow">
+        <img cla="card-img-top border" src={image} alt="Card image cap" />
+        <div cla="card-body">
+          <h5 cla="card-title text-center">{name}</h5>
+          <div cla="card-text d-flex justify-content-between">
             <span className="d-flex align-items-center border">
               <span> Price: </span>
               {currencies.currency ? (
@@ -90,10 +90,10 @@ const ProdCardRes = ({ product }) => {
               </span>
             </span>
           </div>
-          <p class="card-text">{descriptions}</p>
+          <p cla="card-text">{descriptions}</p>
         </div>
-        <div class="card-footer">
-          <small class="text-muted">
+        <div cla="card-footer">
+          <small cla="text-muted">
             <p className=" m-2 d-flex justify-content-end align-items-center">
               Wishlist:{" "}
               <span
