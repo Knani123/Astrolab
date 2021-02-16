@@ -10,7 +10,9 @@ router.post(
   [
     AuthMiddleware,
     [
-      body("name", "Name is empty! ").notEmpty().isLength({ min: 2, max: 20 }),
+      body("name", "Name is empty, enter product name ! ")
+        .notEmpty()
+        .isLength({ min: 2, max: 20 }),
       body("descriptions", "descriptions is empty! ").notEmpty(),
       body("status", "status is empty! ").notEmpty(),
       body("assignedTo", "Wishlist is empty! ").notEmpty(),

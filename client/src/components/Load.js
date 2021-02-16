@@ -5,7 +5,7 @@ const Load = () => {
   setTimeout(() => {
     history.push("/products");
   }, 1000);
-  return <div>Loading....</div>;
+  return <div>Loading...</div>;
 };
 
 export default Load;

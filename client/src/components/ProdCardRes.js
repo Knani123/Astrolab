@@ -20,6 +20,7 @@ const ProdCardRes = ({ product }) => {
   const currencies = useSelector((state) => state.currency);
   const [coeff, setCoeff] = useState("");
 
+  //API  : https://free.currencyconverterapi.com/
   const moneymoney = () => {
     fetch(
       `https://free.currconv.com/api/v7/convert?q=${currency}_${currencies.currency}&compact=ultra&apiKey=7ba4fa27f0e8d7b0f3e7`

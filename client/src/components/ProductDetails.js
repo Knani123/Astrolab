@@ -20,6 +20,8 @@ const ProductDetails = ({ product }) => {
   const currencies = useSelector((state) => state.currency);
   const [coeff, setCoeff] = useState("");
 
+  //API  : https://free.currencyconverterapi.com/
+
   const moneymoney = () => {
     fetch(
       `https://free.currconv.com/api/v7/convert?q=${currency}_${currencies.currency}&compact=ultra&apiKey=7ba4fa27f0e8d7b0f3e7`
@@ -57,7 +59,6 @@ const ProductDetails = ({ product }) => {
           alt="Product image"
         />
         <div
-          // style={{ width: "300px" }}
           style={{ height: "220px" }}
           className="d-flex flex-column justify-content-between m-4  "
         >

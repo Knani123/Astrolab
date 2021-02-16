@@ -9,7 +9,11 @@ router.post(
   "/",
   [
     AuthMiddleware,
-    [body("name", "Name is empty! ").notEmpty().isLength({ min: 2, max: 20 })],
+    [
+      body("name", "Name is empty,enter wishlist name! ")
+        .notEmpty()
+        .isLength({ min: 2, max: 20 }),
+    ],
   ],
 
   (req, res) => {
