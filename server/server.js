@@ -20,7 +20,10 @@ app.use("/wish", require("./routes/wish"));
 app.use("/product", require("./routes/product"));
 //images
 app.use("/img", require("./routes/upload"));
-
+//message from heroku
+app.use("/", (req, res) => {
+  res.send("Hello from heroku !");
+});
 const Port = process.env.PORT || 8000;
 app.listen(Port, (err) => {
   if (err) {

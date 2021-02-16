@@ -30,6 +30,7 @@ const WishProduct = ({ el }) => {
       <span className="col-1 mx-3   text-center ">
         <a href={el.image} target="_blank">
           <img
+            alt="Product image"
             src={el.image}
             alt=""
             style={{ width: "100px" }}

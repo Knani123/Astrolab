@@ -54,7 +54,7 @@ export const clearErrProd = () => (dispatch) => {
 //delete product
 export const deleteproduct = (id) => (dispatch) => {
   axios
-    .delete(`product/${id}`)
+    .delete(`/product/${id}`)
     .then(() => {
       dispatch(getMyProducts());
       dispatch({ type: DELETE_PRODUCT_SUCCESS });

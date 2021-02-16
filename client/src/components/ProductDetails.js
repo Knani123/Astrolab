@@ -54,6 +54,7 @@ const ProductDetails = ({ product }) => {
           width="50%"
           style={{ height: "300px" }}
           className=" mt-5 border shadow"
+          alt="Product image"
         />
         <div
           // style={{ width: "300px" }}

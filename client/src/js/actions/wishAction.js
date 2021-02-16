@@ -54,7 +54,7 @@ export const clearErrwish = () => (dispatch) => {
 //delete Wishlist
 export const deleteWish = (id) => (dispatch) => {
   axios
-    .delete(`wish/${id}`)
+    .delete(`/wish/${id}`)
     .then(() => {
       dispatch(getWishList());
       dispatch({ type: DELETE_WISH_SUCCESS });

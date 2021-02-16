@@ -80,7 +80,12 @@ const AddProduct = () => {
         onSubmit={handleSubmit}
       >
         <div className="mx-auto my-2">
-          <img src={Product} alt="add Logo" width="150px" />
+          <img
+            src={Product}
+            alt="add Logo"
+            width="150px"
+            alt="logo new image"
+          />
           <div className="my-2">
             <label htmlFor="avatar" className="btn btn-warning">
               <i className="far fa-image"></i>

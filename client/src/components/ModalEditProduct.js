@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { getWishList } from "../js/actions/wishAction";
 import { editProduct, clearErrProd } from "../js/actions/productAction";
 import Modal from "react-modal";
 const customStyles = {

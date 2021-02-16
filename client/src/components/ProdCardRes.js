@@ -61,7 +61,7 @@ const ProdCardRes = ({ product }) => {
         <img
           cla="card-img-top border m-auto"
           src={image}
-          alt="Card image cap"
+          alt="Product image "
           style={{ textAlign: "center", width: "80%" }}
         />
         <div cla="card-body">

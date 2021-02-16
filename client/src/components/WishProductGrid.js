@@ -32,6 +32,7 @@ const WishProductGrid = ({ el }) => {
         style={{ width: "15rem", height: "400px" }}
       >
         <img
+          alt="Product image"
           className="card-img-top"
           src={el.image}
           alt="Card image cap"
